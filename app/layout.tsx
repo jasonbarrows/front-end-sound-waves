@@ -5,7 +5,7 @@ import NowPlaying from "./NowPlaying";
 import Header from "./Header";
 import HamburgerMenu from "./HamburgerMenu";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,8 +18,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <section>
+      <body className="container mx-auto">
+        <section className="flex flex-row justify-between m-2">
           <NowPlaying />
           <Header />
           <HamburgerMenu />
