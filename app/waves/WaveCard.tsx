@@ -1,13 +1,19 @@
 import MiniWavePlayer from "./MiniWavePlayer";
+import { Wave } from "../model";
 
-const WaveCard: React.FC = () => {
+interface Props {
+  wave: Wave;
+}
+
+function WaveCard({ wave }: Props) {
+  const { title, wave_url, board_id } = wave;
   return (
     <section>
-      <p>Board</p>
-      <MiniWavePlayer />
-      <p>Wave title</p>
+      <p>Board: {board_id}</p>
+      <MiniWavePlayer wave_url={wave_url} />
+      <p>{title}</p>
     </section>
   );
-};
+}
 
 export default WaveCard;
