@@ -11,7 +11,8 @@ function Waves(): React.ReactElement {
       {
         wave_id: 7,
         title: "Realigned logistical software",
-        wave_url: "waveygravy.com",
+        wave_url:
+          "https://adqofveagcushbnvilmc.supabase.co/storage/v1/object/public/test-1/10s%20test3.webm",
         created_at: "2022-09-04T00:00:00Z",
         user_id: 7,
         board_id: 7,
@@ -22,7 +23,8 @@ function Waves(): React.ReactElement {
       {
         wave_id: 8,
         title: "Moxy,Olaf,Peggy and Eliza",
-        wave_url: "ourchildren.com",
+        wave_url:
+          "https://adqofveagcushbnvilmc.supabase.co/storage/v1/object/public/test-1/12s%20test1.wav",
         created_at: "2022-10-04T00:00:00Z",
         user_id: 8,
         board_id: 8,
@@ -37,7 +39,6 @@ function Waves(): React.ReactElement {
     <section>
       <h2>All Waves</h2>
       <WaveList waves={waves} />
-     
     </section>
   );
 }
