@@ -1,5 +1,9 @@
-const MiniWavePlayer: React.FC = () => {
-  return <audio controls></audio>;
-};
+interface Props {
+  wave_url: string;
+}
 
-export default MiniWavePlayer
+function MiniWavePlayer({ wave_url }: Props) {
+  return <audio controls src={wave_url}></audio>;
+}
+
+export default MiniWavePlayer;

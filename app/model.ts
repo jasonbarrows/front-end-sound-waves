@@ -1,7 +1,13 @@
-export interface wave {
+export interface Wave {
   wave_id: number;
-  wave_title: string;
+  title: string;
   wave_url: string;
-  wave_likes: number;
-  wave_comment_count: number;
+  created_at: string;
+  user_id: number;
+  board_id: number;
+  likes: number;
+  transcript: string;
+  censor: boolean;
 }
+
+

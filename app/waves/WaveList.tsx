@@ -1,13 +1,18 @@
 import WaveCard from "./WaveCard";
+import { Wave } from "../model";
 
-const WaveList: React.FC = () => {
+interface Props {
+  waves: Wave[];
+}
+
+function WaveList({ waves }: Props) {
   return (
     <section>
-      <WaveCard />
-      <WaveCard />
-      <WaveCard />
+      {waves.map((wave) => {
+        return <WaveCard key={wave.wave_id} wave={wave} />;
+      })}
     </section>
   );
-};
+}
 
 export default WaveList;
