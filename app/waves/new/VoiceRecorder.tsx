@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { ReactMic } from "react-mic";
 interface AudioBlob {
   blob: {
@@ -15,11 +15,14 @@ interface AudioBlob {
   startTime: number;
   stopTime: number;
 }
-const VoiceRecorder: React.FC = () => {
-  const [recordedAudio, setRecordedAudio] = useState<string | undefined>(
-    undefined
-  );
+function VoiceRecorder({
+  setAudioData
+} : {
+  setAudioData: Dispatch<SetStateAction<Blob | null>>
+}) {
+  const [recordedAudio, setRecordedAudio] = useState<string | undefined>(undefined);
   const [isRecording, setIsRecording] = useState(false);
+
   return (
     <>
       <section>
@@ -29,6 +32,7 @@ const VoiceRecorder: React.FC = () => {
           onStop={(blob) => {
             const { blobURL } = blob;
             setRecordedAudio(blobURL);
+            setAudioData(blob.blob);
           }}
           onData={(data: unknown) => {}}
         />
