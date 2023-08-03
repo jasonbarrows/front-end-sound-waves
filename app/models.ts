@@ -9,5 +9,3 @@ export interface Wave {
   transcript: string;
   censor: boolean;
 }
-
-
