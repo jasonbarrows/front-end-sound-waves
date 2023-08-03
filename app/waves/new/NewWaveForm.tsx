@@ -1,5 +1,7 @@
+import { Board } from "@/app/model";
+import { getBoards } from "@/app/utils/AxiosFunctions";
 import axios from "axios";
-import { FormEvent, useReducer, useState } from "react";
+import { FormEvent, useReducer, useState, useEffect } from "react";
 
 function NewWaveForm({ audioData }: { audioData: Blob | null }) {
   interface formState {
@@ -12,6 +14,24 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
     board_slug: "",
     username: "",
   });
+
+  const [allBoards, setAllBoards] = useState<Board[]>([]);
+  const [boardLookup, setBoardLookup] = useState<object>({});
+
+  useEffect(() => {
+    setAllBoards(() => {
+      return getBoards().then((data) => {
+        const newBoardLookup = {};
+        data.map(({ board_slug, board_name }) => {
+            
+          newBoardLookup[board_slug] = board_name;
+        });
+        console.log(newBoardLookup)
+        return data;
+      });
+    });
+  }, []);
+
   function formReducer(state: formState, { target }: { target: EventTarget }) {
     return {
       ...state,
