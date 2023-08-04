@@ -6,11 +6,13 @@ interface Props {
 }
 
 function WaveCard({ wave }: Props) {
-  const { title, wave_url, board_id } = wave;
+  const { title, wave_url, board_slug } = wave;
   return (
     <section>
-      <p>Board: {board_id}</p>
-      <MiniWavePlayer wave_url={wave_url} />
+      <p>{board_slug}</p>
+      <MiniWavePlayer
+        wave_url={`https://mffyiqvrkwogdmivjovi.supabase.co/storage/v1/object/public/waves/${wave_url}`}
+      />
       <p>{title}</p>
     </section>
   );
