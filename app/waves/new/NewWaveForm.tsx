@@ -16,22 +16,24 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
   });
 
   const [allBoards, setAllBoards] = useState<Board[]>([]);
-  const [boardLookup, setBoardLookup] = useState<object>({});
+  const [boardLookup, setBoardLookup] = useState<Array<[string, string]>>([]);
 
   useEffect(() => {
     setAllBoards(() => {
-      return getBoards().then((data) => {
-        const newBoardLookup = {};
-        data.map(({ board_slug, board_name }) => {
-            
-          newBoardLookup[board_slug] = board_name;
+      return getBoards().then(({ boards }: { boards: Board[] }) => {
+        console.log(boards);
+        const newBoardLookup = [];
+        boards.map(({ board_slug, board_name }) => {
+          newBoardLookup.push([board_slug, board_name]);
         });
-        console.log(newBoardLookup)
-        return data;
+
+        setBoardLookup(newBoardLookup);
+        return boards;
       });
     });
   }, []);
 
+  console.log(newWaveFormData);
   function formReducer(state: formState, { target }: { target: EventTarget }) {
     return {
       ...state,
@@ -70,13 +72,20 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
         onChange={setNewWaveFormData}
       />
       <label id="board_slug">Board Slug:</label>
-      <input
+      <select
         className="border-4 border-black"
-        id="board_slug"
-        type="text"
-        name="board_slug"
         onChange={setNewWaveFormData}
-      />
+        name="board_slug"
+      >
+        {boardLookup.map((boardDetails) => {
+          return (
+            <option key={boardDetails[0]} value={boardDetails[0]}>
+              {boardDetails[1]}
+            </option>
+          );
+        })}
+      </select>
+
       <label id="username">Username:</label>
       <input
         className="border-4 border-black"
