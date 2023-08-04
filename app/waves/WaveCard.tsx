@@ -1,5 +1,5 @@
 import MiniWavePlayer from "./MiniWavePlayer";
-import { Wave } from "../model";
+import { Wave } from "../models";
 
 interface Props {
   wave: Wave;

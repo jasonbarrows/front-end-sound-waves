@@ -1,18 +1,14 @@
 import WaveCard from "./WaveCard";
-import { Wave } from "../model";
+import { Wave } from "../models";
 
 interface Props {
   waves: Wave[];
 }
 
 function WaveList({ waves }: Props) {
-  return (
-    <section>
-      {waves.map((wave) => {
-        return <WaveCard key={wave.wave_id} wave={wave} />;
-      })}
-    </section>
-  );
+  return waves.map((wave) => (
+    <WaveCard key={wave.wave_id} wave={wave} />
+  ))
 }
 
 export default WaveList;

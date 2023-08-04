@@ -9,11 +9,3 @@ export interface Wave {
   transcript: string;
   censor: boolean;
 }
-
-export interface Board {
-  board_slug: string;
-  board_name: string;
-  created_at: string;
-  description: string;
-  username: string;
-}

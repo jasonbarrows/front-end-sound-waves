@@ -5,8 +5,8 @@ import HamburgerMenu from "./HamburgerMenu";
 
 export default function Home() {
   return (
-    <main>
-      <p>This is the home page. Login details need to be added.</p>
+    <main className="m-4">
+        <p>This is the home page. Login details need to be added.</p>
     </main>
   );
 }
