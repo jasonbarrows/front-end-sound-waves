@@ -11,13 +11,18 @@ function Page() {
   const [audioData, setAudioData] = useState<Blob | null>(null);
 
   return (
-    <section>
-      <h2>Create a new wave</h2>
-      <VoiceRecorder setAudioData={setAudioData} />
-      <NewWaveForm audioData={audioData} />
-      <UploadAudio />
-      <TranscriptViewer />
-    </section>
+    <main className="m-4">
+      <h1 className="text-2xl sm:text-3xl font-semibold text-violet-900">
+        Create a new wave
+      </h1>
+
+      <div className="">
+        <VoiceRecorder setAudioData={setAudioData} />
+        <NewWaveForm audioData={audioData} />
+        {/* <UploadAudio />
+        <TranscriptViewer /> */}
+      </div>
+    </main>
   );
 }
 
