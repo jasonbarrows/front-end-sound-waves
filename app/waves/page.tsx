@@ -44,7 +44,7 @@ function Waves(): React.ReactElement {
 
   return (
     <main className="m-4">
-      <h2 className="text-2xl sm:text-3xl">The Ocean</h2>
+      <h2 className="text-2xl sm:text-3xl font-semibold text-violet-900">The Ocean</h2>
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <WaveList waves={waves} />
       </div>
