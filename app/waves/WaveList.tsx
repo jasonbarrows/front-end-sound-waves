@@ -1,5 +1,6 @@
 import WaveCard from "./WaveCard";
 import { Wave } from "../models";
+import TwoRowWaveCard from "./TwoRowWaveCard";
 
 interface Props {
   waves: Wave[];
@@ -7,7 +8,8 @@ interface Props {
 
 function WaveList({ waves }: Props) {
   return waves.map((wave) => (
-    <WaveCard key={wave.wave_id} wave={wave} />
+    // <WaveCard key={wave.wave_id} wave={wave} />
+    <TwoRowWaveCard key={wave.wave_id} wave={wave} />
   ))
 }
 
