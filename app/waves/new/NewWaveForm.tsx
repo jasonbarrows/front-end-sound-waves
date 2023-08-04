@@ -1,7 +1,8 @@
-import { Board } from "@/app/model";
+import { UserContent, UserContext } from "@/app/context";
+import { Board } from "@/app/models";
 import { getBoards } from "@/app/utils/AxiosFunctions";
 import axios from "axios";
-import { FormEvent, useReducer, useState, useEffect } from "react";
+import { useReducer, useState, useEffect, useContext } from "react";
 
 function NewWaveForm({ audioData }: { audioData: Blob | null }) {
   interface formState {
@@ -9,37 +10,30 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
     board_slug: string;
     username: string;
   }
+  const { currentUser, setCurrentUser } = useContext<UserContent>(UserContext);
   const [newWaveFormData, setNewWaveFormData] = useReducer(formReducer, {
     title: "",
     board_slug: "",
-    username: "",
+    username: currentUser.username,
   });
-
-  const [allBoards, setAllBoards] = useState<Board[]>([]);
-  const [boardLookup, setBoardLookup] = useState<Array<[string, string]>>([]);
-
-  useEffect(() => {
-    setAllBoards(() => {
-      return getBoards().then(({ boards }: { boards: Board[] }) => {
-        console.log(boards);
-        const newBoardLookup = [];
-        boards.map(({ board_slug, board_name }) => {
-          newBoardLookup.push([board_slug, board_name]);
-        });
-
-        setBoardLookup(newBoardLookup);
-        return boards;
-      });
-    });
-  }, []);
-
-  console.log(newWaveFormData);
   function formReducer(state: formState, { target }: { target: EventTarget }) {
     return {
       ...state,
       [(target as HTMLFormElement).name]: (target as HTMLFormElement).value,
     };
   }
+  const [allBoards, setAllBoards] = useState<Board[]>([]);
+  const [boardLookup, setBoardLookup] = useState<[string, string][]>([]);
+
+  useEffect(() => {
+    getBoards().then(({ boards }) => {
+      const newBoardLookup = boards.map(({ board_slug, board_name }) => {
+        return [board_slug, board_name];
+      });
+      console.log(newBoardLookup);
+      setBoardLookup(newBoardLookup);
+    });
+  }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -63,7 +57,7 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <label id="title">Title:</label>
+      <label htmlFor="title">Title:</label>
       <input
         className="border-4 border-black"
         id="title"
@@ -71,7 +65,7 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
         name="title"
         onChange={setNewWaveFormData}
       />
-      <label id="board_slug">Board Slug:</label>
+      <label htmlFor="board_slug">Board Slug:</label>
       <select
         className="border-4 border-black"
         onChange={setNewWaveFormData}
@@ -86,14 +80,15 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
         })}
       </select>
 
-      <label id="username">Username:</label>
+      <label htmlFor="username">Username:</label>
       <input
-        className="border-4 border-black"
-        id="username"
-        type="text"
-        name="username"
+        hidden
         onChange={setNewWaveFormData}
+        id="username"
+        name="username"
+        value={currentUser.username}
       />
+      <p>{currentUser.username}</p>
       <button>Submit</button>
     </form>
   );

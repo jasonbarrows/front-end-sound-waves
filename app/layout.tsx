@@ -1,7 +1,9 @@
+
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "./Header";
+import { UserProvider } from "./context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +21,7 @@ export default function RootLayout({
       <body className="bg-gray-50 text-gray-900">
         <Header />
         <div className="container mx-auto">
-          {children}
+          <UserProvider>{children}</UserProvider>
         </div>
       </body>
     </html>
