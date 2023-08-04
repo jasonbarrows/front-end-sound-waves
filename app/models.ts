@@ -3,8 +3,8 @@ export interface Wave {
   title: string;
   wave_url: string;
   created_at: string;
-  user_id: number;
-  board_id: number;
+  username: string;
+  board_slug: string;
   likes: number;
   transcript: string;
   censor: boolean;
