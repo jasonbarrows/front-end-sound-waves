@@ -21,11 +21,11 @@ import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/
 
 
 const products = [
-  { name: "Jason's Tailwind Masterclass", description: 'Hot hacks to put some sizzle in your styling', href: '#', icon: ChartPieIcon },
-  { name: "Adam's Tales of Wizardry", description: 'The art, skill, or accomplishments of a wizard', href: '#', icon: CursorArrowRaysIcon },
-  { name: 'Valentina - Mother of Dragons', description: 'All things Olaf', href: '#', icon: FingerPrintIcon },
-  { name: 'Big C for Cannibalism', description: '...', href: '#', icon: SquaresPlusIcon },
-  { name: "Marija's 50 Shades of Pink", description: 'For adults only', href: '#', icon: ArrowPathIcon },
+  // { name: "Jason's Tailwind Masterclass", description: 'Hot hacks to put some sizzle in your styling', href: '#', icon: ChartPieIcon },
+  // { name: "Adam's Tales of Wizardry", description: 'The art, skill, or accomplishments of a wizard', href: '#', icon: CursorArrowRaysIcon },
+  // { name: 'Valentina - Mother of Dragons', description: 'All things Olaf', href: '#', icon: FingerPrintIcon },
+  // { name: 'Big C for Cannibalism', description: '...', href: '#', icon: SquaresPlusIcon },
+  // { name: "Marija's 50 Shades of Pink", description: 'For adults only', href: '#', icon: ArrowPathIcon },
 ]
 const callsToAction = [
   // { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
@@ -43,14 +43,14 @@ export default function Example() {
     <header className="bg-white">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
-          <Link href="/waves" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">SoundWaves</span>
             <GiBigWave className="h-6 w-6"/>
             {/* <img className="h-6 w-6" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" /> */}
           </Link>
         </div>
         <div>
-          <Link href="/waves">
+          <Link href="/">
             <p className="text-xl text-violet-800">
               <span className="font-extralight">Sound</span>
               <span className="font-semibold">Waves</span>
@@ -70,10 +70,10 @@ export default function Example() {
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
-            <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+            {/* <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
               Followed Boards
               <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
-            </Popover.Button>
+            </Popover.Button> */}
 
             <Transition
               as={Fragment}
@@ -84,7 +84,7 @@ export default function Example() {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+              {/* <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                 <div className="p-4">
                   {products.map((item) => (
                     <div
@@ -116,23 +116,26 @@ export default function Example() {
                     </Link>
                   ))}
                 </div>
-              </Popover.Panel>
+              </Popover.Panel> */}
             </Transition>
           </Popover>
 
-          <Link href="/waves/new" className="text-sm font-semibold leading-6 text-gray-900">
-            Add a wave
-          </Link>
           <Link href="/waves" className="text-sm font-semibold leading-6 text-gray-900">
             The Ocean
           </Link>
-          <Link href="/users" className="text-sm font-semibold leading-6 text-gray-900">
-            {/* {currentUser.hasOwnProperty(username) ? currentUser.username : 'username'} */}
-            BigC
+          <Link href="/boards" className="text-sm font-semibold leading-6 text-gray-900">
+            View Boards
+          </Link>
+          <Link href="/waves/new" className="text-sm font-semibold leading-6 text-gray-900">
+            Make a wave
           </Link>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link href="/login" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link href="/" className="text-sm font-semibold leading-6 text-gray-900">
+            {/* {currentUser.hasOwnProperty(username) ? currentUser.username : 'username'} */}
+            Aloha, agileAvenger
+          </Link>
+          <Link href="/" className="text-sm font-semibold leading-6 text-gray-900">
             Log out <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
@@ -141,8 +144,8 @@ export default function Example() {
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <Link href="/waves" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+            <Link href="/" className="-m-1.5 p-1.5">
+              <span className="sr-only">SoundWaves</span>
               {/* <img
                 className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -165,13 +168,13 @@ export default function Example() {
                 <Disclosure as="div" className="-mx-3">
                   {({ open }) => (
                     <>
-                      <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                      {/* <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                         Followed Boards
                         <ChevronDownIcon
                           className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')}
                           aria-hidden="true"
                         />
-                      </Disclosure.Button>
+                      </Disclosure.Button> */}
                       <Disclosure.Panel className="mt-2 space-y-2">
                         {[...products, ...callsToAction].map((item) => (
                           <Disclosure.Button
@@ -203,19 +206,19 @@ export default function Example() {
                   href="/waves/new"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Add a Wave
+                  Make a Wave
                 </Link>
               </div>
               <div className="py-6">
                 <Link
-                  href="#"
+                  href="/"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   {/* {currentUser.hasOwnProperty(username) ? currentUser.username : 'username'} */}
-                  Aloha, BigC
+                  Aloha, agileAvenger
                 </Link>
                 <Link
-                  href="#"
+                  href="/"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Log out
