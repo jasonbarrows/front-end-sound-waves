@@ -1,7 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Wave } from "../models";
 import { ago } from "../utils";
-import { WaveContext, WaveContextType } from "../AudioContext";
+import { WaveContext } from "../AudioContext";
+import Link from "next/link";
 
 interface Props {
   wave: Wave;
@@ -19,11 +20,12 @@ function WaveCard({ wave }: Props) {
   } = useContext(WaveContext);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement>();
-  
+
 
   useEffect(() => {
-   
-    play();
+    if (isPlaying) {
+      play();
+    }
   }, [currentWave]);
 
   return (
@@ -37,7 +39,9 @@ function WaveCard({ wave }: Props) {
           {ago(new Date(created_at))}
         </p>
       </div>
-      <p className="text-xl font-medium text-sky-700">{title}</p>
+      <Link href={`/waves/${wave.wave_id}`}>
+        <p className="text-xl font-medium text-sky-700">{title}</p>
+      </Link>
       <div className="w-full flex items-center space-x-2 text-sm font-medium text-violet-700">
         <button
           className="flex items-center"
@@ -45,7 +49,6 @@ function WaveCard({ wave }: Props) {
             setCurrentWave(wave);
             setIsPlaying((current) => !current);
             if (isPlaying) {
-              console.log("pause");
               pause();
             }
           }}

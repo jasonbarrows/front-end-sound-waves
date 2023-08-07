@@ -8,7 +8,6 @@ function CommentList(props): React.ReactElement {
   useEffect(() => {
     getCommentsbyWaveId(props.wave_id)
     .then((res) => {
-      console.log(res, '<<<')
       setComments(res.comments);
     });
   }, [])

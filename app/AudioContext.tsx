@@ -46,7 +46,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
       controls
       ref={playerRef}
       src={
-        "https://mffyiqvrkwogdmivjovi.supabase.co/storage/v1/object/public/waves/" +
+        wave_url && "https://mffyiqvrkwogdmivjovi.supabase.co/storage/v1/object/public/waves/" +
         wave_url
       }
     ></audio>
