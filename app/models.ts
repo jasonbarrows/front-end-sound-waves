@@ -8,6 +8,7 @@ export interface Wave {
   likes: number;
   transcript: string;
   censor: boolean;
+  comment_count: number;
 }
 
 export interface Board {

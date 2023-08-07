@@ -6,7 +6,7 @@ import { PiWaves } from "react-icons/pi";
 import Link from "next/link";
 import { UserContent, UserContext } from "@/app/context";
 
-import { Fragment, useState, useContext } from "react";
+import { Fragment, useState, useContext, useEffect, useRef } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import {
   ArrowPathIcon,
@@ -66,7 +66,7 @@ function classNames(...classes) {
 
 export default function Example() {
   const { currentUser, setCurrentUser } = useContext<UserContent>(UserContext);
-  
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -103,13 +103,13 @@ export default function Example() {
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
-            <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+            {/* <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
               Followed Boards
               <ChevronDownIcon
                 className="h-5 w-5 flex-none text-gray-400"
                 aria-hidden="true"
               />
-            </Popover.Button>
+            </Popover.Button> */}
 
             <Transition
               as={Fragment}
@@ -166,26 +166,32 @@ export default function Example() {
           </Popover>
 
           <Link
-            href="/waves/new"
-            className="text-sm font-semibold leading-6 text-gray-900"
-          >
-            Add a wave
-          </Link>
-          <Link
             href="/waves"
             className="text-sm font-semibold leading-6 text-gray-900"
           >
             The Ocean
           </Link>
           <Link
+            href="/boards"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
+            Boards
+          </Link>
+          <Link
+            href="/waves/new"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
+            Make a Wave
+          </Link>
+        </Popover.Group>
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6">
+          <Link
             href="/users"
             className="text-sm font-semibold leading-6 text-gray-900"
           >
             {/* {currentUser.hasOwnProperty(username) ? currentUser.username : 'username'} */}
-            {currentUser.username}
+            <span>Aloha, {currentUser.username}</span>
           </Link>
-        </Popover.Group>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link
             href="/login"
             className="text-sm font-semibold leading-6 text-gray-900"
@@ -203,8 +209,8 @@ export default function Example() {
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <Link href="/waves" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+            <Link href="/waves" className="-m-1.5 p-1.5" onClick={() => { setMobileMenuOpen(false) }}>
+              <span className="sr-only">SoundWaves</span>
               {/* <img
                 className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -224,7 +230,7 @@ export default function Example() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                <Disclosure as="div" className="-mx-3">
+                {/* <Disclosure as="div" className="-mx-3">
                   {({ open }) => (
                     <>
                       <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
@@ -251,30 +257,34 @@ export default function Example() {
                       </Disclosure.Panel>
                     </>
                   )}
-                </Disclosure>
+                </Disclosure> */}
                 <Link
                   href="/waves"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  onClick={() => { setMobileMenuOpen(false) }}
                 >
                   The Ocean
                 </Link>
                 <Link
                   href="/boards"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  onClick={() => { setMobileMenuOpen(false) }}
                 >
                   View Boards
                 </Link>
                 <Link
                   href="/waves/new"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  onClick={() => { setMobileMenuOpen(false) }}
                 >
-                  Add a Wave
+                  Make a Wave
                 </Link>
               </div>
               <div className="py-6">
                 <Link
-                  href="#"
+                  href="/profile"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  onClick={() => { setMobileMenuOpen(false) }}
                 >
                   {/* {currentUser.hasOwnProperty(username) ? currentUser.username : 'username'} */}
                   Aloha, BigC
