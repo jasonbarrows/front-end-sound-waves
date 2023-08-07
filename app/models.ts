@@ -8,6 +8,7 @@ export interface Wave {
   likes: number;
   transcript: string;
   censor: boolean;
+  comment_count: number;
 }
 
 export interface Board {
@@ -23,4 +24,13 @@ export interface User {
   email: string;
   avatar_url: string;
   password: string;
+}
+
+export interface Comment {
+  comment_id: number;
+  comment: string;
+  created_at: string;
+  likes: number;
+  username: string;
+  wave_id: number;
 }
