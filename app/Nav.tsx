@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { GiBigWave } from 'react-icons/gi'
-import { PiWaves } from 'react-icons/pi'
+import { GiBigWave } from "react-icons/gi";
+import { PiWaves } from "react-icons/pi";
 
-import Link from 'next/link';
-import { UserContent, UserContext } from '@/app/context'
-const { currentUser, setCurrentUser } = useContext<UserContent>(UserContext)
-import { Fragment, useState, useContext } from 'react'
-import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
+import Link from "next/link";
+import { UserContent, UserContext } from "@/app/context";
+
+import { Fragment, useState, useContext } from "react";
+import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import {
   ArrowPathIcon,
   Bars3Icon,
@@ -16,36 +16,69 @@ import {
   FingerPrintIcon,
   SquaresPlusIcon,
   XMarkIcon,
-} from '@heroicons/react/24/outline'
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
-
+} from "@heroicons/react/24/outline";
+import {
+  ChevronDownIcon,
+  PhoneIcon,
+  PlayCircleIcon,
+} from "@heroicons/react/20/solid";
 
 const products = [
-  { name: "Jason's Tailwind Masterclass", description: 'Hot hacks to put some sizzle in your styling', href: '#', icon: ChartPieIcon },
-  { name: "Adam's Tales of Wizardry", description: 'The art, skill, or accomplishments of a wizard', href: '#', icon: CursorArrowRaysIcon },
-  { name: 'Valentina - Mother of Dragons', description: 'All things Olaf', href: '#', icon: FingerPrintIcon },
-  { name: 'Big C for Cannibalism', description: '...', href: '#', icon: SquaresPlusIcon },
-  { name: "Marija's 50 Shades of Pink", description: 'For adults only', href: '#', icon: ArrowPathIcon },
-]
+  {
+    name: "Jason's Tailwind Masterclass",
+    description: "Hot hacks to put some sizzle in your styling",
+    href: "#",
+    icon: ChartPieIcon,
+  },
+  {
+    name: "Adam's Tales of Wizardry",
+    description: "The art, skill, or accomplishments of a wizard",
+    href: "#",
+    icon: CursorArrowRaysIcon,
+  },
+  {
+    name: "Valentina - Mother of Dragons",
+    description: "All things Olaf",
+    href: "#",
+    icon: FingerPrintIcon,
+  },
+  {
+    name: "Big C for Cannibalism",
+    description: "...",
+    href: "#",
+    icon: SquaresPlusIcon,
+  },
+  {
+    name: "Marija's 50 Shades of Pink",
+    description: "For adults only",
+    href: "#",
+    icon: ArrowPathIcon,
+  },
+];
 const callsToAction = [
   // { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
   // { name: 'Contact sales', href: '#', icon: PhoneIcon },
-]
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { currentUser, setCurrentUser } = useContext<UserContent>(UserContext);
+  
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className="bg-white">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        aria-label="Global"
+      >
         <div className="flex lg:flex-1">
           <Link href="/waves" className="-m-1.5 p-1.5">
             <span className="sr-only">SoundWaves</span>
-            <GiBigWave className="h-6 w-6"/>
+            <GiBigWave className="h-6 w-6" />
             {/* <img className="h-6 w-6" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" /> */}
           </Link>
         </div>
@@ -65,14 +98,17 @@ export default function Example() {
           >
             <span className="sr-only">Open main menu</span>
             {/* <Bars3Icon className="h-6 w-6" aria-hidden="true" /> */}
-            <PiWaves className="h-6 w-6" aria-hidden="true"/>
+            <PiWaves className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
             <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
               Followed Boards
-              <ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+              <ChevronDownIcon
+                className="h-5 w-5 flex-none text-gray-400"
+                aria-hidden="true"
+              />
             </Popover.Button>
 
             <Transition
@@ -92,10 +128,16 @@ export default function Example() {
                       className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
                     >
                       <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                        <item.icon className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
+                        <item.icon
+                          className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                          aria-hidden="true"
+                        />
                       </div>
                       <div className="flex-auto">
-                        <Link href={item.href} className="block font-semibold text-gray-900">
+                        <Link
+                          href={item.href}
+                          className="block font-semibold text-gray-900"
+                        >
                           {item.name}
                           <span className="absolute inset-0" />
                         </Link>
@@ -111,7 +153,10 @@ export default function Example() {
                       href={item.href}
                       className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
                     >
-                      <item.icon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+                      <item.icon
+                        className="h-5 w-5 flex-none text-gray-400"
+                        aria-hidden="true"
+                      />
                       {item.name}
                     </Link>
                   ))}
@@ -120,24 +165,41 @@ export default function Example() {
             </Transition>
           </Popover>
 
-          <Link href="/waves/new" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link
+            href="/waves/new"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
             Add a wave
           </Link>
-          <Link href="/waves" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link
+            href="/waves"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
             The Ocean
           </Link>
-          <Link href="/users" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link
+            href="/users"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
             {/* {currentUser.hasOwnProperty(username) ? currentUser.username : 'username'} */}
-            BigC
+            {currentUser.username}
           </Link>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link href="/login" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link
+            href="/login"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
             Log out <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
       </nav>
-      <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+      <Dialog
+        as="div"
+        className="lg:hidden"
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
+      >
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
@@ -148,7 +210,7 @@ export default function Example() {
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                 alt=""
               /> */}
-              <GiBigWave className="h-8 w-auto"/>
+              <GiBigWave className="h-8 w-auto" />
             </Link>
             <button
               type="button"
@@ -168,7 +230,10 @@ export default function Example() {
                       <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                         Followed Boards
                         <ChevronDownIcon
-                          className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')}
+                          className={classNames(
+                            open ? "rotate-180" : "",
+                            "h-5 w-5 flex-none"
+                          )}
                           aria-hidden="true"
                         />
                       </Disclosure.Button>
@@ -226,5 +291,5 @@ export default function Example() {
         </Dialog.Panel>
       </Dialog>
     </header>
-  )
+  );
 }
