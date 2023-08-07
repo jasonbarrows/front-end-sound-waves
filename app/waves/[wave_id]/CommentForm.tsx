@@ -5,7 +5,7 @@ function CommentForm(): React.ReactElement {
         <label htmlFor="comment" className="sr-only">Comment</label>
         <input id="comment" className="border-black-500 border-2"></input>
       </div>
-      <button>Add comment:</button>
+      <button>Add comment</button>
     </form>
   );
 }
