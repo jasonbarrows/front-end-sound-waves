@@ -1,17 +1,34 @@
 "use client";
 
 import { Wave } from "./models";
-import { WaveContext } from "./AudioContext";
-import { useContext } from "react";
+import { WaveContext, WaveContextType } from "./AudioContext";
+import { useContext, useEffect, useRef } from "react";
 
 interface Props {
   currentWave: Wave;
 }
 
 const NowPlaying: React.FC<Props> = () => {
-  const { currentWave, setCurrentWave } = useContext(WaveContext);
-  // const { title, wave_url } = currentWave;
-  console.log(currentWave);
+  const {
+    currentWave,
+    setCurrentWave,
+    globalIsPlaying,
+    setGlobalIsPlaying,
+    nowPlaying,
+  } = useContext<WaveContextType | null>(WaveContext);
+  const { title, wave_url } = currentWave;
+
+  // const audioRef = useRef<HTMLAudioElement>();
+
+  // useEffect(() => {
+  //   console.dir(audioRef.current);
+  //   if (globalIsPlaying) {
+  //     audioRef.current?.play();
+  //   } else {
+  //     audioRef.current?.pause();
+  //   }
+  // }, [globalIsPlaying, audioRef]);
+
   return (
     <div className="flex flex-row items-center space-y-1 bg-white w-full fixed bottom-0 h-32 justify-around">
       <div className="p-1.5 flex items-center justify-center ring-2 ring-pink-400 text-pink-700 rounded-full">
@@ -29,8 +46,19 @@ const NowPlaying: React.FC<Props> = () => {
         </svg>
       </div>
       <div className="flex flex-col ">
-        <p className="text-xs"> Now playing</p>
-        <audio controls></audio>
+        <p className="text-xs"> Now playing: {title}</p>
+        {/* <audio
+          controls
+          src={
+            "https://mffyiqvrkwogdmivjovi.supabase.co/storage/v1/object/public/waves/" +
+            wave_url
+          }
+          // ref={audioRef}
+          onEnded={() => {
+            setGlobalIsPlaying(false)
+          }}
+        ></audio> */}
+        {nowPlaying(wave_url)}
       </div>
     </div>
   );
