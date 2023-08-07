@@ -25,3 +25,12 @@ export interface User {
   avatar_url: string;
   password: string;
 }
+
+export interface Comment {
+  comment_id: number;
+  comment: string;
+  created_at: string;
+  likes: number;
+  username: string;
+  wave_id: number;
+}

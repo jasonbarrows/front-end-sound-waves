@@ -23,3 +23,9 @@ export function getWaveById(wave_id: number): Promise<{wave: Wave}> {
     return response.data;
   });
 }
+
+export function getCommentsbyWaveId(wave_id: number): Promise<{comments: Array<Comment>}> {
+  return api.get(`/waves/${wave_id}/comments`).then((response) => {
+    return response.data;
+  });
+}

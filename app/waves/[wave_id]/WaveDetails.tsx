@@ -2,7 +2,7 @@ import { Wave } from "@/app/models";
 import WavePlayer from "../WavePlayer";
 import VoteButton from "../new/VoteButton";
 import { ago } from "@/app/utils";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 function WaveDetails({
   wave
@@ -11,6 +11,16 @@ function WaveDetails({
 }): React.ReactElement {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showTranscript, setShowTranscript] = useState(false);
+  const audioRef = useRef()
+
+  const playPause = () => {
+    setIsPlaying(curr => !curr)
+    if (!isPlaying) {
+      audioRef.current.play()
+    } else {
+      audioRef.current.pause()
+    }
+  }
 
   return (
     <div>
@@ -32,12 +42,19 @@ function WaveDetails({
               viewBox="0 0 20 20"
               fill="currentColor"
               className="w-5 h-5"
-            >
-              <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+            > 
+            {
+              !isPlaying
+              ? <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+              : <path d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z" />  
+            } 
             </svg>
             <audio
-              hidden
-              // ref={audioRef}
+              // controls
+              onEnded={() => {
+                setIsPlaying(false)
+              }}
+              ref={audioRef}
               src={
                 "https://mffyiqvrkwogdmivjovi.supabase.co/storage/v1/object/public/waves/" +
                 wave.wave_url
@@ -47,9 +64,7 @@ function WaveDetails({
             </audio>
             <span
               className="ml-2"
-              onClick={() => {
-                setIsPlaying((current) => !current);
-              }}
+              onClick={playPause}
             >
               {isPlaying ? "Pause" : "Listen"}
             </span>
@@ -113,8 +128,8 @@ function WaveDetails({
         }
       </div>
 
-      <VoteButton />
-      <WavePlayer />
+      {/* <VoteButton />
+      <WavePlayer /> */}
     </div>
   );
 }
