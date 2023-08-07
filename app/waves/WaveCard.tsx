@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Wave } from "../models";
 import { ago } from "../utils";
+import { WaveContext, WaveContextType } from "../AudioContext";
 
 interface Props {
   wave: Wave;
@@ -8,16 +9,22 @@ interface Props {
 
 function WaveCard({ wave }: Props) {
   const { title, wave_url, board_slug, created_at, username } = wave;
-
+  const {
+    currentWave,
+    setCurrentWave,
+    globalIsPlaying,
+    setGlobalIsPlaying,
+    play,
+    pause,
+  } = useContext(WaveContext);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement>();
+  
+
   useEffect(() => {
-    if (isPlaying) {
-      audioRef.current?.play();
-    } else {
-      audioRef.current?.pause();
-    }
-  }, [isPlaying, audioRef]);
+   
+    play();
+  }, [currentWave]);
 
   return (
     <div className="p-4 w-full shadow border rounded-xl bg-white flex flex-col space-y-2">
@@ -32,7 +39,17 @@ function WaveCard({ wave }: Props) {
       </div>
       <p className="text-xl font-medium text-sky-700">{title}</p>
       <div className="w-full flex items-center space-x-2 text-sm font-medium text-violet-700">
-        <button className="flex items-center">
+        <button
+          className="flex items-center"
+          onClick={() => {
+            setCurrentWave(wave);
+            setIsPlaying((current) => !current);
+            if (isPlaying) {
+              console.log("pause");
+              pause();
+            }
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -51,14 +68,7 @@ function WaveCard({ wave }: Props) {
           >
             {" "}
           </audio>
-          <span
-            className="ml-1"
-            onClick={() => {
-              setIsPlaying((current) => !current);
-            }}
-          >
-            {isPlaying ? "Pause" : "Listen"}
-          </span>
+          <span className="ml-1">{isPlaying ? "Pause" : "Listen"}</span>
         </button>
         <span className="text-neutral-300">/</span>
         <p className="text-sm font-light">on b/{board_slug}</p>
