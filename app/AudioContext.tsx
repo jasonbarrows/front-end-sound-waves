@@ -37,6 +37,10 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
     playerRef.current.pause();
   }
 
+  function play() {
+    playerRef.current.play();
+  }
+
   const nowPlaying = (wave_url) => (
     <audio
       controls
