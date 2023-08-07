@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Wave } from "../models";
 import { ago } from "../utils";
+import { WaveContext } from "../AudioContext";
 
 interface Props {
   wave: Wave;
@@ -8,10 +9,11 @@ interface Props {
 
 function WaveCard({ wave }: Props) {
   const { title, wave_url, board_slug, created_at, username } = wave;
-
+  const { currentWave, setCurrentWave } = useContext(WaveContext);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement>();
   useEffect(() => {
+    setCurrentWave(wave)
     if (isPlaying) {
       audioRef.current?.play();
     } else {
@@ -55,6 +57,7 @@ function WaveCard({ wave }: Props) {
             className="ml-1"
             onClick={() => {
               setIsPlaying((current) => !current);
+              // setCurrentWave(wave);
             }}
           >
             {isPlaying ? "Pause" : "Listen"}

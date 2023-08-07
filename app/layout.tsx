@@ -1,9 +1,13 @@
+// "use client";
+
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "./Header";
 import Nav from "./Nav";
 import { UserProvider } from "./context";
+import { AudioProvider } from "./AudioContext";
+import NowPlaying from "./NowPlaying";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +23,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <UserProvider>
-        <body className="bg-sky-50 text-neutral-900">
-          <Nav />
-          <div className="container mx-auto">{children}</div>
-        </body>
+        <AudioProvider>
+          <body className="bg-sky-50 text-neutral-900">
+            <Nav />
+            <div className="container mx-auto">
+              {children} <NowPlaying />
+            </div>
+          </body>
+        </AudioProvider>
       </UserProvider>
     </html>
   );
