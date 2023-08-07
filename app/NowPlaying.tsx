@@ -18,18 +18,7 @@ const NowPlaying: React.FC<Props> = () => {
   } = useContext<WaveContextType | null>(WaveContext);
   const { title, wave_url } = currentWave;
 
-  // const audioRef = useRef<HTMLAudioElement>();
-
-  // useEffect(() => {
-  //   console.dir(audioRef.current);
-  //   if (globalIsPlaying) {
-  //     audioRef.current?.play();
-  //   } else {
-  //     audioRef.current?.pause();
-  //   }
-  // }, [globalIsPlaying, audioRef]);
-
-  return (
+    return (
     <div className="flex flex-row items-center space-y-1 bg-white w-full fixed bottom-0 h-32 justify-around">
       <div className="p-1.5 flex items-center justify-center ring-2 ring-pink-400 text-pink-700 rounded-full">
         <svg
@@ -47,18 +36,7 @@ const NowPlaying: React.FC<Props> = () => {
       </div>
       <div className="flex flex-col ">
         <p className="text-xs"> Now playing: {title}</p>
-        {/* <audio
-          controls
-          src={
-            "https://mffyiqvrkwogdmivjovi.supabase.co/storage/v1/object/public/waves/" +
-            wave_url
-          }
-          // ref={audioRef}
-          onEnded={() => {
-            setGlobalIsPlaying(false)
-          }}
-        ></audio> */}
-        {nowPlaying(wave_url)}
+                {nowPlaying(wave_url)}
       </div>
     </div>
   );

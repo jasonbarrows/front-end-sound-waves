@@ -17,7 +17,6 @@ export interface WaveContextType {
 }
 
 export const WaveContext = createContext<WaveContextType | null>(null);
-// export const isPlayingContext = createContext(null)
 
 export const AudioProvider = ({ children }: { children: ReactNode }) => {
   const [currentWave, setCurrentWave] = useState<Wave>({
@@ -33,25 +32,9 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
   });
   const [globalIsPlaying, setGlobalIsPlaying] = useState<boolean>(false);
   const playerRef = useRef<HTMLAudioElement>();
-  function play(data) {
-    // if (data) {
-    //   dispatch({ type: "SET_META", payload: data });
-
-    //   if (playerRef.current.currentSrc !== data.audio.src) {
-    //     let playbackRate = playerRef.current.playbackRate;
-    //     playerRef.current.src = data.audio.src;
-    //     playerRef.current.load();
-    //     playerRef.current.pause();
-    //     playerRef.current.playbackRate = playbackRate;
-    //     playerRef.currentTime = 0;
-    //   }
-    // }
-
-    playerRef.current.play();
-  }
 
   function pause() {
-    playerRef.current.pause()
+    playerRef.current.pause();
   }
 
   const nowPlaying = (wave_url) => (
@@ -73,7 +56,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
         setGlobalIsPlaying,
         nowPlaying,
         play,
-        pause
+        pause,
       }}
     >
       {children}

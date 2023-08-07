@@ -19,17 +19,10 @@ function WaveCard({ wave }: Props) {
   } = useContext(WaveContext);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement>();
-  // useEffect(() => {
-  //   if (globalIsPlaying) {
-  //     audioRef.current?.play();
-  //   } else {
-  //     audioRef.current?.pause();
-  //   }
-  // }, [isPlaying, audioRef]);
+  
 
   useEffect(() => {
-    // setGlobalIsPlaying((current) => !current);
-    // pause()
+   
     play();
   }, [currentWave]);
 
