@@ -15,8 +15,8 @@ export default function TwoRowWaveCard({
   setWaveClicked,
 }: Props) {
   const { wave_url, title, board_slug, created_at, likes, username } = wave;
-  //   const audioRef = useRef();
-
+  //   const audioRef = useRef()
+  console.log(wave);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   //   useEffect(() => {
   //     if (isPlaying) {

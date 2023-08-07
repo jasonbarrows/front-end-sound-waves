@@ -13,7 +13,6 @@ function MiniWavePlayer({
   isPlaying,
   setIsPlaying,
 }: Props) {
-  
   const audioRef = useRef();
   useEffect(() => {
     if (isPlaying) {
@@ -24,7 +23,15 @@ function MiniWavePlayer({
   }, [isPlaying, audioRef]);
   return (
     <div className="flex flex-col items-center justify-center">
-      <audio src={wave_url} controls hidden ref={audioRef} />
+      <audio
+        src={
+          "https://mffyiqvrkwogdmivjovi.supabase.co/storage/v1/object/public/waves/" +
+          wave_url
+        }
+        controls
+        hidden
+        ref={audioRef}
+      />
       <button
         className={isPlaying ? "text-violet-900" : "text-pink-700 "}
         onClick={() => {
