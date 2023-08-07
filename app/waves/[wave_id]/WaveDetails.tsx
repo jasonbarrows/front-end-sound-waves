@@ -7,7 +7,7 @@ import { useState } from "react";
 function WaveDetails({
   wave
 }: {
-  wave: Wave
+  wave: Wave;
 }): React.ReactElement {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showTranscript, setShowTranscript] = useState(false);

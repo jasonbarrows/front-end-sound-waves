@@ -6,18 +6,19 @@ import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
 import { useEffect, useState } from "react";
 import { getWaveById } from "@/app/utils/AxiosFunctions";
+import { Wave } from "@/app/models";
 
 export default function Page({
   params,
 }: {
   params: { wave_id: number };
 }): React.ReactElement {
-  const [wave, setWave] = useState({});
+  const [wave, setWave] = useState<Wave | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getWaveById(params.wave_id)
-      .then((wave) => {
+      .then(({ wave }) => {
         setWave(wave);
         setIsLoading(false);
       })

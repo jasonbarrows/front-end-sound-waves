@@ -20,6 +20,6 @@ export function getUsers(): Promise<{users: Array<User>}> {
 
 export function getWaveById(wave_id: number): Promise<{wave: Wave}> {
   return api.get(`/waves/${wave_id}`).then((response) => {
-    return response.data.wave;
+    return response.data;
   });
 }
