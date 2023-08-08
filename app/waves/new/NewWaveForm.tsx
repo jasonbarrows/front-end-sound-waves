@@ -3,6 +3,7 @@ import { Board } from "@/app/models";
 import { createWave, getBoards } from "@/app/utils/AxiosFunctions";
 import axios from "axios";
 import { useReducer, useState, useEffect, useContext } from "react";
+import LoadingSpinner from "./LoadingSpinner";
 
 function NewWaveForm({ audioData }: { audioData: Blob | null }) {
   interface formState {
@@ -10,27 +11,32 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
     board_slug: string;
     username: string | undefined;
   }
-  const { currentUser, setCurrentUser } = useContext(UserContext) as UserContent;
+
+  const { currentUser, setCurrentUser } = useContext(
+    UserContext
+  ) as UserContent;
+
   const [newWaveFormData, setNewWaveFormData] = useReducer(formReducer, {
     title: "",
     board_slug: "",
     username: currentUser?.username,
   });
+
   function formReducer(state: formState, { target }: { target: EventTarget }) {
     return {
       ...state,
       [(target as HTMLFormElement).name]: (target as HTMLFormElement).value,
     };
   }
-  const [allBoards, setAllBoards] = useState<Board[]>([]);
+
   const [boardLookup, setBoardLookup] = useState<string[][]>([]);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   useEffect(() => {
     getBoards().then(({ boards }) => {
       const newBoardLookup = boards.map(({ board_slug, board_name }) => {
         return [board_slug, board_name];
       });
-      console.log(newBoardLookup);
       setBoardLookup(newBoardLookup);
     });
   }, []);
@@ -39,13 +45,14 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
     formData.append("audio_file", audioData as Blob, "audio.webm");
-
+    setIsUploading(true);
     createWave(formData)
-      .then((response) => {
-        console.log(response);
-      })
+      .then((response) => {})
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsUploading(false);
       });
   };
 
@@ -92,7 +99,8 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
       </div>
       <div className="mt-4 flex flex-col items-center space-y-4">
         <button className="flex border-2 bg-violet-700 shadow border-violet-500 rounded-full p-3 text-white hover:bg-violet-200">
-          Submit
+          {isUploading && <LoadingSpinner />}
+          {isUploading ? "Submitting" : "Submit"}
         </button>
       </div>
     </form>
