@@ -23,7 +23,6 @@ function WaveCard({ wave }: Props) {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement>();
 
-
   useEffect(() => {
     if (isPlaying) {
       play();
@@ -42,8 +41,9 @@ function WaveCard({ wave }: Props) {
           {ago(new Date(created_at))}
         </p>
       </div>
+
       <Link href={`/waves/${wave.wave_id}`}>
-        <p className="text-xl font-medium text-sky-700">{title}</p>
+        <p className="text-xl font-medium text-cyan-700">{title}</p>
       </Link>
       <div className="w-full flex items-center space-x-2 text-sm font-medium text-violet-700">
         <button
