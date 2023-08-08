@@ -64,20 +64,20 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col max-w-lg">
       <label className="text-lg mt-3" htmlFor="title">
-        Title:
+        Title
       </label>
       <input
-        className="border-2 border-violet-700 rounded-full p-1 focus:outline-none focus:ring focus:ring-violet-300"
+        className="border-2 border-violet-700 rounded-full py-2 px-4 focus:outline-none focus:ring focus:ring-violet-300  "
         id="title"
         type="text"
         name="title"
         onChange={setNewWaveFormData}
       />
-      <label className="text-lg mt-3" htmlFor="board_slug">
-        Board Slug:
+      <label className="mt-3" htmlFor="board_slug">
+        Board
       </label>
       <select
-        className="border-2 border-violet-700 rounded-full p-1 focus:outline-none focus:ring focus:ring-violet-300"
+        className="border-2 border-violet-700 rounded-full py-2 px-4 focus:outline-none focus:ring focus:ring-violet-300"
         onChange={setNewWaveFormData}
         name="board_slug"
       >
@@ -89,19 +89,13 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
           );
         })}
       </select>
-      <div className="flex flex-row">
-        <label className="text-lg mt-3" htmlFor="username">
-          Username:
-        </label>
-        <input
-          hidden
-          onChange={setNewWaveFormData}
-          id="username"
-          name="username"
-          value={currentUser?.username}
-        />
-        <p className="ml-2 mt-3">{currentUser?.username}</p>
-      </div>
+      <input
+        hidden
+        onChange={setNewWaveFormData}
+        id="username"
+        name="username"
+        value={currentUser?.username}
+      />
       <div className="mt-4 flex flex-col items-center space-y-4">
         <button
           disabled={isUploading}

@@ -5,7 +5,7 @@ function NewBoardForm(): React.ReactElement {
         className="border-black-500 border-2"
         placeholder="Browse boards"
       ></input>
-      <label htmlFor="title">Board name:</label>
+      <label htmlFor="title">Search</label>
       <input className="border-black-500 border-2"></input>
       <button className="border-4 border-pink-500">Add new Board:</button>
     </form>
