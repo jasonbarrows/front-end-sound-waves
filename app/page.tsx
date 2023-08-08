@@ -3,12 +3,12 @@ import { useContext, useEffect, useState } from "react";
 import { User } from "./models";
 import { getUsers } from "./utils/AxiosFunctions";
 import UserCard from "./UserCards";
-import { UserContext } from "./context";
+import { UserContent, UserContext } from "./context";
 
 export default function Home() {
   //
   const [allUsers, setAllUsers] = useState<User[]>([]);
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext) as UserContent;
 
   useEffect(() => {
     getUsers().then(({ users }) => {
