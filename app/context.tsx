@@ -10,7 +10,7 @@ import { User } from "./models";
 
 export interface UserContent {
   currentUser: User | null;
-  setCurrentUser: Dispatch<SetStateAction<User>> | null;
+  setCurrentUser: Dispatch<SetStateAction<User | null>> | null;
 }
 export const UserContext = createContext<UserContent | null>({
   currentUser: null,
@@ -18,7 +18,7 @@ export const UserContext = createContext<UserContent | null>({
 });
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [currentUser, setCurrentUser] = useState<User>({
+  const [currentUser, setCurrentUser] = useState<User | null>({
     username: "BigA",
     email: "cpragnell3@yellowbook.com",
     avatar_url: "http://dummyimage.com/182x100.png/dddddd/000000",

@@ -9,6 +9,7 @@ export interface Wave {
   transcript: string;
   censor: boolean;
   comment_count: number;
+  avatar_url: string;
 }
 
 export interface Board {
