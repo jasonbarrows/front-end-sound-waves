@@ -39,15 +39,15 @@ export function getCommentsbyWaveId(
   });
 }
 
-export function createWave(formData: FormData): Promise<object> {
+export function createWave(formData: FormData): Promise<{ wave: Wave }> {
   return api
     .post("/waves", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     })
-    .then((response) => {
-      console.log(response);
-      return response;
+    .then(({ data }) => {
+      console.log(data);
+      return data;
     });
 }

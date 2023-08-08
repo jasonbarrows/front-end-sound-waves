@@ -5,6 +5,7 @@ import { WaveContext, WaveContextType } from "../AudioContext";
 import Link from "next/link";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 interface Props {
   wave: Wave;
@@ -30,16 +31,27 @@ function WaveCard({ wave }: Props) {
   }, [currentWave]);
 
   return (
-    <div className="p-4 w-full shadow border rounded-xl bg-white flex flex-col space-y-2">
-      <div className="flex items-center space-x-1">
-        <img className="w-8 h-8 rounded-full" src={avatar_url}></img>
-        <p className="text-sm font-medium truncate text-neutral-700">
-          {username}
-        </p>
-        <span className="text-neutral-300">•</span>
-        <p className="text-sm font-light text-neutral-500">
-          {ago(new Date(created_at))}
-        </p>
+    <div className="p-4 sm:px-8 sm:py-6 w-full shadow border rounded-xl bg-white flex flex-col space-y-2">
+      <div className="flex item-center justify-between">
+        <div className="flex items-center space-x-1">
+          <img className="w-8 h-8 rounded-full" src={avatar_url}></img>
+          <p className="text-sm font-medium truncate text-neutral-700">
+            {username}
+          </p>
+          <span className="text-neutral-300">•</span>
+          <p className="text-sm font-light text-neutral-500">
+            {ago(new Date(created_at))}
+          </p>
+        </div>
+        {
+          !wave.censor &&
+          <div className="text-pink-600 flex items-center text-sm sm:text-base">
+            <span className="block">Explicit</span>
+            <span className="ml-1 sm:ml-2 w-6 h-6 sm:w-8 sm:h-8">
+              <ExclamationTriangleIcon />
+            </span>
+          </div>
+        }
       </div>
 
       <Link href={`/waves/${wave.wave_id}`}>

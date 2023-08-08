@@ -16,7 +16,7 @@ const NowPlaying: React.FC = () => {
   return (
     <div
       hidden={globalIsPlaying}
-      className="flex flex-row items-center space-y-1 border-t bg-white w-full fixed bottom-0 h-32 justify-around"
+      className="flex flex-row items-center space-y-1 border-t bg-white w-full fixed left-0 right-0 bottom-0 h-32 justify-around shadow-lg"
     >
       <div className="p-1.5 flex items-center justify-center ring-2 ring-pink-400 text-pink-700 rounded-full">
         <svg

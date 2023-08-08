@@ -1,9 +1,8 @@
 import { UserContent, UserContext } from "@/app/context";
-import { Board } from "@/app/models";
 import { createWave, getBoards } from "@/app/utils/AxiosFunctions";
-import axios from "axios";
 import { useReducer, useState, useEffect, useContext } from "react";
 import LoadingSpinner from "./LoadingSpinner";
+import { useRouter } from "next/navigation";
 
 function NewWaveForm({ audioData }: { audioData: Blob | null }) {
   interface formState {
@@ -32,6 +31,8 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
   const [boardLookup, setBoardLookup] = useState<string[][]>([]);
   const [isUploading, setIsUploading] = useState<boolean>(false);
 
+  const router = useRouter();
+
   useEffect(() => {
     getBoards().then(({ boards }) => {
       const newBoardLookup = boards.map(({ board_slug, board_name }) => {
@@ -43,11 +44,15 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsUploading(true);
+
     const formData = new FormData(event.target as HTMLFormElement);
     formData.append("audio_file", audioData as Blob, "audio.webm");
-    setIsUploading(true);
+
     createWave(formData)
-      .then((response) => {})
+      .then(({ wave }) => {
+        router.push(`/waves/${wave.wave_id}`);
+      })
       .catch((err) => {
         console.log(err);
       })
@@ -98,9 +103,12 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
         <p className="ml-2 mt-3">{currentUser?.username}</p>
       </div>
       <div className="mt-4 flex flex-col items-center space-y-4">
-        <button className="flex border-2 bg-violet-700 shadow border-violet-500 rounded-full p-3 text-white hover:bg-violet-200">
+        <button
+          disabled={isUploading}
+          className={`flex items-center border-2 shadow text-violet-50 border-violet-500 bg-violet-700 rounded-full py-3 px-6 ${isUploading ? '' : 'active:bg-violet-900'}`}
+        >
           {isUploading && <LoadingSpinner />}
-          {isUploading ? "Submitting" : "Submit"}
+          <span className="ml-1">{isUploading ? "Submitting" : "Submit"}</span>
         </button>
       </div>
     </form>

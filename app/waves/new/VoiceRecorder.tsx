@@ -43,7 +43,7 @@ function VoiceRecorder({
           onData={(data: unknown) => {}}
         />
         <button
-          className={` flex border-2 bg-violet-700 border-violet-500 rounded-full p-3 hover:bg-violet-200 ${
+          className={`flex border-2 bg-violet-700 border-violet-500 rounded-full py-3 px-6 hover:bg-violet-200 ${
             isRecording ? "text-cyan-300" : "text-white"
           }`}
           onClick={() => {
@@ -68,9 +68,9 @@ function VoiceRecorder({
               className="w-6 h-6"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M4.5 7.5a3 3 0 013-3h9a3 3 0 013 3v9a3 3 0 01-3 3h-9a3 3 0 01-3-3v-9z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               />
             </svg>
           )}
