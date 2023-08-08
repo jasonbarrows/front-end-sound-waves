@@ -1,9 +1,9 @@
 import { Wave } from "@/app/models";
-import WavePlayer from "../WavePlayer";
-import VoteButton from "../new/VoteButton";
 import { ago } from "@/app/utils";
 import { useState, useRef, useContext, useEffect } from "react";
 import { WaveContext } from "@/app/AudioContext";
+import { AiOutlineHeart } from "react-icons/ai";
+import { FaRegComment } from "react-icons/fa";
 
 function WaveDetails({
     wave
@@ -40,6 +40,7 @@ function WaveDetails({
     <div>
       <div className="p-4 w-full shadow border rounded-xl bg-white flex flex-col space-y-3">
         <div className="flex items-center space-x-1">
+        <img className="w-8 h-8 rounded-full" src={wave.avatar_url}></img>
           <p className="text-sm font-medium truncate text-neutral-700">
             {wave.username}
           </p>
@@ -86,37 +87,11 @@ function WaveDetails({
 
           <div className="flex justify-end space-x-4">
             <div className="flex items-center space-x-1">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-5 h-5 text-neutral-300"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-                />
-              </svg>
+              <AiOutlineHeart className="w-5 h-5 text-neutral-300"/>
               <p className="text-sm text-neutral-500">{wave.likes}</p>
             </div>
             <div className="flex items-center space-x-1">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-5 h-5 text-neutral-300"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"
-                />
-              </svg>
+              <FaRegComment className="w-5 h-5 text-neutral-300"/>
               <p className="text-sm text-neutral-500">{wave.comment_count}</p>
             </div>
           </div>
