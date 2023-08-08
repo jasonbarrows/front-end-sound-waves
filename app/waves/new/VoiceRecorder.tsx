@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction, useState } from "react";
 import { ReactMic } from "react-mic";
+
 interface AudioBlob {
   blob: {
     size: number;
@@ -15,6 +16,7 @@ interface AudioBlob {
   startTime: number;
   stopTime: number;
 }
+
 function VoiceRecorder({
   setAudioData,
 }: {

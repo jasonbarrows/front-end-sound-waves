@@ -1,10 +1,7 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
-import TranscriptViewer from "./TranscriptViewer";
-import UploadAudio from "./UploadAudio";
+import { useState } from "react";
 import VoiceRecorder from "./VoiceRecorder";
-import axios from "axios";
 import NewWaveForm from "./NewWaveForm";
 
 function Page() {
@@ -19,8 +16,6 @@ function Page() {
       <div className="">
         <VoiceRecorder setAudioData={setAudioData} />
         <NewWaveForm audioData={audioData} />
-        {/* <UploadAudio />
-        <TranscriptViewer /> */}
       </div>
     </main>
   );

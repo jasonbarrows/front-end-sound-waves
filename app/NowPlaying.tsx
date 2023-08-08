@@ -4,11 +4,7 @@ import { Wave } from "./models";
 import { WaveContext, WaveContextType } from "./AudioContext";
 import { useContext, useEffect, useRef } from "react";
 
-interface Props {
-  currentWave: Wave;
-}
-
-const NowPlaying: React.FC<Props> = () => {
+const NowPlaying: React.FC = () => {
   const {
     currentWave,
     setCurrentWave,

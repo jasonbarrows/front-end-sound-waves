@@ -3,7 +3,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Header from "./Header";
 import Nav from "./Nav";
 import { UserProvider } from "./context";
 import { AudioProvider } from "./AudioContext";

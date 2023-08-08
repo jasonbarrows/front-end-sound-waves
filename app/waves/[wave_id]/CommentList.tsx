@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import CommentCard from "./CommentCard";
 import { getCommentsbyWaveId } from "@/app/utils/AxiosFunctions";
+import { Comment } from "@/app/models";
 
-function CommentList(props): React.ReactElement {
-  const [comments, setComments] = useState([])
+interface Props {
+  wave_id: number;
+};
+
+function CommentList({ wave_id }: Props): React.ReactElement {
+  const [comments, setComments] = useState<Comment[]>([])
 
   useEffect(() => {
-    getCommentsbyWaveId(props.wave_id)
-    .then((res) => {
-      setComments(res.comments);
-    });
+    getCommentsbyWaveId(wave_id)
+      .then(({ comments }) => {
+        setComments(comments);
+      });
   }, [])
 
   return (

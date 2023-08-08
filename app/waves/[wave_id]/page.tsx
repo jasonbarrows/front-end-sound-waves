@@ -1,6 +1,5 @@
 "use client";
 
-import { useParams } from "next/navigation";
 import WaveDetails from "./WaveDetails";
 import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
@@ -17,8 +16,6 @@ export default function Page({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log(process.env.NEXT_PUBLIC_BACKEND_BASE_URL);
-
     getWaveById(params.wave_id)
       .then(({ wave }) => {
         setWave(wave);

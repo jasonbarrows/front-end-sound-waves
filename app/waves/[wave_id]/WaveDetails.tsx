@@ -41,7 +41,7 @@ function WaveDetails({
     <div>
       <div className="p-4 w-full shadow border rounded-xl bg-white flex flex-col space-y-3">
         <div className="flex items-center space-x-1">
-        <img className="w-8 h-8 rounded-full" src={wave.avatar_url}></img>
+        <img className="w-8 h-8 rounded-full" src={wave?.avatar_url}></img>
           <p className="text-sm font-medium truncate text-neutral-700">
             {wave?.username}
           </p>
@@ -89,11 +89,11 @@ function WaveDetails({
           <div className="flex justify-end space-x-4">
             <div className="flex items-center space-x-1">
               <AiOutlineHeart className="w-5 h-5 text-neutral-300"/>
-              <p className="text-sm text-neutral-500">{wave.likes}</p>
+              <p className="text-sm text-neutral-500">{wave?.likes}</p>
             </div>
             <div className="flex items-center space-x-1">
               <FaRegComment className="w-5 h-5 text-neutral-300"/>
-              <p className="text-sm text-neutral-500">{wave.comment_count}</p>
+              <p className="text-sm text-neutral-500">{wave?.comment_count}</p>
             </div>
           </div>
         </div>
