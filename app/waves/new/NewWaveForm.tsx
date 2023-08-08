@@ -57,21 +57,21 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col max-w-lg">
-      <label className="text-lg" htmlFor="title">
+      <label className="text-lg mt-3" htmlFor="title">
         Title:
       </label>
       <input
-        className="border-2 border-violet-700 rounded-full p-1"
+        className="border-2 border-violet-700 rounded-full p-1 focus:outline-none focus:ring focus:ring-violet-300"
         id="title"
         type="text"
         name="title"
         onChange={setNewWaveFormData}
       />
-      <label className="text-lg" htmlFor="board_slug">
+      <label className="text-lg mt-3" htmlFor="board_slug">
         Board Slug:
       </label>
       <select
-        className="border-2 border-violet-700 rounded-full p-1"
+        className="border-2 border-violet-700 rounded-full p-1 focus:outline-none focus:ring focus:ring-violet-300"
         onChange={setNewWaveFormData}
         name="board_slug"
       >
@@ -84,7 +84,7 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
         })}
       </select>
       <div className="flex flex-row">
-        <label className="text-lg" htmlFor="username">
+        <label className="text-lg mt-3" htmlFor="username">
           Username:
         </label>
         <input
@@ -94,10 +94,10 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
           name="username"
           value={currentUser.username}
         />
-        <p>{currentUser.username}</p>
+        <p className="ml-2 mt-3">{currentUser.username}</p>
       </div>
       <div className="mt-4 flex flex-col items-center space-y-4">
-        <button className="flex border-2 bg-white shadow border-violet-500 rounded-full p-3 text-violet-700">
+        <button className="flex border-2 bg-violet-700 shadow border-violet-500 rounded-full p-3 text-white hover:bg-violet-200">
           Submit
         </button>
       </div>
