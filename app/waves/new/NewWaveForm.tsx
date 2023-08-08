@@ -1,8 +1,8 @@
 import { UserContent, UserContext } from "@/app/context";
-import { Board } from "@/app/models";
 import { createWave, getBoards } from "@/app/utils/AxiosFunctions";
-import axios from "axios";
 import { useReducer, useState, useEffect, useContext } from "react";
+import LoadingSpinner from "./LoadingSpinner";
+import { useRouter } from "next/navigation";
 
 function NewWaveForm({ audioData }: { audioData: Blob | null }) {
   interface formState {
@@ -10,42 +10,54 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
     board_slug: string;
     username: string | undefined;
   }
-  const { currentUser, setCurrentUser } = useContext(UserContext) as UserContent;
+
+  const { currentUser, setCurrentUser } = useContext(
+    UserContext
+  ) as UserContent;
+
   const [newWaveFormData, setNewWaveFormData] = useReducer(formReducer, {
     title: "",
     board_slug: "",
     username: currentUser?.username,
   });
+
   function formReducer(state: formState, { target }: { target: EventTarget }) {
     return {
       ...state,
       [(target as HTMLFormElement).name]: (target as HTMLFormElement).value,
     };
   }
-  const [allBoards, setAllBoards] = useState<Board[]>([]);
+
   const [boardLookup, setBoardLookup] = useState<string[][]>([]);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     getBoards().then(({ boards }) => {
       const newBoardLookup = boards.map(({ board_slug, board_name }) => {
         return [board_slug, board_name];
       });
-      console.log(newBoardLookup);
       setBoardLookup(newBoardLookup);
     });
   }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsUploading(true);
+
     const formData = new FormData(event.target as HTMLFormElement);
     formData.append("audio_file", audioData as Blob, "audio.webm");
 
     createWave(formData)
-      .then((response) => {
-        console.log(response);
+      .then(({ wave }) => {
+        router.push(`/waves/${wave.wave_id}`);
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsUploading(false);
       });
   };
 
@@ -85,8 +97,12 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
         value={currentUser?.username}
       />
       <div className="mt-4 flex flex-col items-center space-y-4">
-        <button className="flex border-2 bg-violet-700 shadow border-violet-500 rounded-full p-3 text-white">
-          Submit
+        <button
+          disabled={isUploading}
+          className={`flex items-center border-2 shadow text-violet-50 border-violet-500 bg-violet-700 rounded-full py-3 px-6 ${isUploading ? '' : 'active:bg-violet-900'}`}
+        >
+          {isUploading && <LoadingSpinner />}
+          <span className="ml-1">{isUploading ? "Submitting" : "Submit"}</span>
         </button>
       </div>
     </form>

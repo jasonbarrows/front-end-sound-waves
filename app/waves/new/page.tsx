@@ -9,7 +9,7 @@ function Page() {
 
   return (
     <main className="m-4">
-      <h1 className="text-2xl sm:text-3xl font-semibold text-violet-900">
+      <h1 className="sr-only text-2xl sm:text-3xl font-semibold text-violet-900">
         Create a new wave
       </h1>
 

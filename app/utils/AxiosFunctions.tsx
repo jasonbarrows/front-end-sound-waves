@@ -24,27 +24,31 @@ export function getUsers(): Promise<{ users: Array<User> }> {
   });
 }
 
-
-export function getWaveById(wave_id: number): Promise<{wave: Wave}> {
+export function getWaveById(wave_id: number): Promise<{ wave: Wave }> {
   return api.get(`/waves/${wave_id}`).then(({ data }) => {
     return data;
   });
 }
 
-export function getCommentsbyWaveId(wave_id: number): Promise<{comments: Comment[]}> {
+export function getCommentsbyWaveId(
+  wave_id: number
+): Promise<{ comments: Comment[] }> {
   return api.get(`/waves/${wave_id}/comments`).then(({ data }) => {
     console.log(data);
     return data;
   });
 }
 
-export function createWave(formData: FormData): Promise<object> {
-  return api.post('/waves', formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  }).then((response) => {
-    return response;
-  });
+export function createWave(formData: FormData): Promise<{ wave: Wave }> {
+  return api
+    .post("/waves", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then(({ data }) => {
+      console.log(data);
+      return data;
+    });
 }
   
