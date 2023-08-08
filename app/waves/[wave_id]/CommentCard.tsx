@@ -5,6 +5,7 @@ function CommentCard(props: Comment[]): React.ReactElement {
   return (
     <div className="p-4 w-full shadow border rounded-xl bg-white flex flex-col space-y-2">
       <div className="flex items-center space-x-1">
+        <img className="w-8 h-8 rounded-full" src={props.comment.avatar_url}></img>
         <p className="text-sm font-medium truncate text-neutral-700">
           {props.comment.username}
         </p>
