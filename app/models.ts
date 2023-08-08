@@ -18,6 +18,7 @@ export interface Board {
   description: string;
   created_at: string;
   username: string;
+  avatar_url: string;
 }
 
 export interface User {
@@ -36,3 +37,4 @@ export interface Comment {
   wave_id: number;
   avatar_url: string;
 }
+

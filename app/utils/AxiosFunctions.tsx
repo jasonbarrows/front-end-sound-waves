@@ -5,24 +5,25 @@ const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
 });
 
-export function getAllWaves(): Promise<{waves: Wave[]}> {
+export function getAllWaves(): Promise<{ waves: Wave[] }> {
   return api.get("/waves").then(({ data }) => {
     return data;
   });
 }
 
-export function getBoards(): Promise<{boards: Array<Board>}> {
+export function getBoards(): Promise<{ boards: Array<Board> }> {
   return api.get("/boards").then(({ data }) => {
     return data;
   });
 }
 
-export function getUsers(): Promise<{users: Array<User>}> {
+export function getUsers(): Promise<{ users: Array<User> }> {
   return api.get("/users").then(({ data }) => {
     console.log("this is data", data);
-    return data
+    return data;
   });
 }
+
 
 export function getWaveById(wave_id: number): Promise<{wave: Wave}> {
   return api.get(`/waves/${wave_id}`).then(({ data }) => {
@@ -46,3 +47,4 @@ export function createWave(formData: FormData): Promise<object> {
     return response;
   });
 }
+  
