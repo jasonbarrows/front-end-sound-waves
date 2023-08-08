@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Wave } from "../models";
 import { ago } from "../utils";
-import { WaveContext } from "../AudioContext";
+import { WaveContext, WaveContextType } from "../AudioContext";
 import Link from "next/link";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
@@ -19,7 +19,7 @@ function WaveCard({ wave }: Props) {
     setGlobalIsPlaying,
     play,
     pause,
-  } = useContext(WaveContext);
+  } = useContext(WaveContext) as WaveContextType;
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement>();
 
@@ -64,16 +64,6 @@ function WaveCard({ wave }: Props) {
           >
             <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
           </svg>
-          <audio
-            hidden
-            ref={audioRef}
-            src={
-              "https://mffyiqvrkwogdmivjovi.supabase.co/storage/v1/object/public/waves/" +
-              wave_url
-            }
-          >
-            {" "}
-          </audio>
           <span className="ml-1">{isPlaying ? "Pause" : "Listen"}</span>
         </button>
         <span className="text-neutral-300">/</span>

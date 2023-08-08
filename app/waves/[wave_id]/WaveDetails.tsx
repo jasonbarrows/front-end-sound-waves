@@ -1,14 +1,15 @@
 import { Wave } from "@/app/models";
 import { ago } from "@/app/utils";
 import { useState, useRef, useContext, useEffect } from "react";
-import { WaveContext } from "@/app/AudioContext";
+import { WaveContext, WaveContextType } from "@/app/AudioContext";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
+
 
 function WaveDetails({
     wave
 }: {
-  wave: Wave;
+  wave: Wave | null;
 }): React.ReactElement {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showTranscript, setShowTranscript] = useState(false);
@@ -18,7 +19,7 @@ function WaveDetails({
     globalIsPlaying,
     setGlobalIsPlaying,
     play,
-    pause } = useContext(WaveContext);
+    pause } = useContext(WaveContext) as WaveContextType;
 
   useEffect(() => {
     if (isPlaying) {
@@ -42,11 +43,11 @@ function WaveDetails({
         <div className="flex items-center space-x-1">
         <img className="w-8 h-8 rounded-full" src={wave.avatar_url}></img>
           <p className="text-sm font-medium truncate text-neutral-700">
-            {wave.username}
+            {wave?.username}
           </p>
           <span className="text-neutral-300">•</span>
           <p className="text-sm font-light text-neutral-500">
-            {ago(new Date(wave.created_at))}
+            {wave && ago(new Date(wave.created_at))}
           </p>
         </div>
         <div className="w-full flex items-center space-x-2 text-sm font-medium text-violet-700">
@@ -71,7 +72,7 @@ function WaveDetails({
             </span>
           </button>
           <span className="text-neutral-300">/</span>
-          <p className="text-sm font-light">on b/{wave.board_slug}</p>
+          <p className="text-sm font-light">on b/{wave?.board_slug}</p>
         </div>
 
         <div className="flex items-center justify-between">
@@ -98,13 +99,10 @@ function WaveDetails({
         </div>
         {
           showTranscript && <div>
-            <p className="text-sm">{wave.transcript}</p>
+            <p className="text-sm">{wave?.transcript}</p>
           </div>
         }
       </div>
-
-      {/* <VoteButton />
-      <WavePlayer /> */}
     </div>
   );
 }

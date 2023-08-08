@@ -17,6 +17,8 @@ export default function Page({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    console.log(process.env.NEXT_PUBLIC_BACKEND_BASE_URL);
+
     getWaveById(params.wave_id)
       .then(({ wave }) => {
         setWave(wave);
@@ -37,7 +39,7 @@ export default function Page({
 
   return (
     <main className="m-4">
-      <h1 className="text-2xl sm:text-3xl font-semibold text-violet-900">{wave.title}</h1>
+      <h1 className="text-2xl sm:text-3xl font-semibold text-violet-900">{wave?.title}</h1>
       <div className="mt-4 ">
         <WaveDetails wave={wave} />
         <CommentList wave_id={params.wave_id}/>

@@ -15,8 +15,7 @@ const NowPlaying: React.FC<Props> = () => {
     globalIsPlaying,
     setGlobalIsPlaying,
     nowPlaying,
-  } = useContext<WaveContextType | null>(WaveContext);
-  const { title, wave_url } = currentWave;
+  } = useContext(WaveContext) as WaveContextType;
 
   return (
     <div
@@ -38,8 +37,8 @@ const NowPlaying: React.FC<Props> = () => {
         </svg>
       </div>
       <div className="flex flex-col ">
-        <p className="text-xs font-semibold">{title}</p>
-        {nowPlaying(wave_url)}
+        <p className="text-xs font-semibold">{currentWave?.title}</p>
+        {nowPlaying(currentWave?.wave_url)}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import WaveList from "./WaveList";
 import { useEffect, useState } from "react";
 import { Wave } from "../models";
 import axios from "axios";
+import { getAllWaves } from "../utils/AxiosFunctions";
 
 function Waves(): React.ReactElement {
   const [waves, setWaves] = useState<Wave[]>([
@@ -34,11 +35,9 @@ function Waves(): React.ReactElement {
   ]);
 
   useEffect(() => {
-    axios
-      .get("https://back-end-sound-waves.onrender.com/api/waves")
-      .then(({ data }) => {
-        console.log(data);
-        setWaves(data.waves);
+    getAllWaves()
+      .then(({ waves }) => {
+        setWaves(waves);
       });
   }, []);
 
