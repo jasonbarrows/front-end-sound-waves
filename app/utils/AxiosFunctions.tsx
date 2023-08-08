@@ -2,8 +2,14 @@ import axios from "axios";
 import { Board, User, Wave } from "../models";
 
 const api = axios.create({
-  baseURL: "https://back-end-sound-waves.onrender.com/api",
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
 });
+
+export function getAllWaves(): Promise<{waves: Wave[]}> {
+  return api.get("/waves").then(({ data }) => {
+    return data;
+  });
+}
 
 export function getBoards(): Promise<{boards: Array<Board>}> {
   return api.get("/boards").then(({ data }) => {
