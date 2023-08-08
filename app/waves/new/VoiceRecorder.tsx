@@ -43,8 +43,10 @@ function VoiceRecorder({
           onData={(data: unknown) => {}}
         />
         <button
-          className={` flex border-2 bg-white border-violet-500 rounded-full p-3 ${
-            isRecording ? "text-pink-400 border-pink-400" : "text-violet-700"
+          className={` flex border-2 bg-white  rounded-full p-3 ${
+            isRecording
+              ? "text-pink-600 border-pink-600"
+              : "text-violet-700 border-violet-500"
           }`}
           onClick={() => {
             setIsRecording((current) => !current);
