@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Board, User, Wave } from "../models";
+import { Board, User, Wave, Comment } from "../models";
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
@@ -25,13 +25,24 @@ export function getUsers(): Promise<{users: Array<User>}> {
 }
 
 export function getWaveById(wave_id: number): Promise<{wave: Wave}> {
-  return api.get(`/waves/${wave_id}`).then((response) => {
-    return response.data;
+  return api.get(`/waves/${wave_id}`).then(({ data }) => {
+    return data;
   });
 }
 
-export function getCommentsbyWaveId(wave_id: number): Promise<{comments: Array<Comment>}> {
-  return api.get(`/waves/${wave_id}/comments`).then((response) => {
-    return response.data;
+export function getCommentsbyWaveId(wave_id: number): Promise<{comments: Comment[]}> {
+  return api.get(`/waves/${wave_id}/comments`).then(({ data }) => {
+    console.log(data);
+    return data;
+  });
+}
+
+export function createWave(formData: FormData): Promise<object> {
+  return api.post('/waves', formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  }).then((response) => {
+    return response;
   });
 }

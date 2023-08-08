@@ -34,4 +34,5 @@ export interface Comment {
   likes: number;
   username: string;
   wave_id: number;
+  avatar_url: string;
 }

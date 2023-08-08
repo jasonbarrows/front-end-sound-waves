@@ -1,4 +1,6 @@
 "use client";
+
+import { Wave } from "@/app/models";
 import WaveList from "@/app/waves/WaveList";
 import { useParams } from "next/navigation";
 
@@ -7,6 +9,8 @@ export default function Page({
 }: {
   params: { board_name: string };
 }): React.ReactElement {
+  const waves = [] as Wave[];
+
   return (
     <section className="flex flex-col m-1">
       <p>Board name {params.board_name}</p>
@@ -17,7 +21,7 @@ export default function Page({
         ></input>
         <button className="border-4 border-pink-500">Post</button>
       </div>
-      <WaveList />
+      <WaveList waves={waves} />
     </section>
   );
 }

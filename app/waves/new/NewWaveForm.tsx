@@ -1,6 +1,6 @@
 import { UserContent, UserContext } from "@/app/context";
 import { Board } from "@/app/models";
-import { getBoards } from "@/app/utils/AxiosFunctions";
+import { createWave, getBoards } from "@/app/utils/AxiosFunctions";
 import axios from "axios";
 import { useReducer, useState, useEffect, useContext } from "react";
 
@@ -8,13 +8,13 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
   interface formState {
     title: string;
     board_slug: string;
-    username: string;
+    username: string | undefined;
   }
-  const { currentUser, setCurrentUser } = useContext<UserContent>(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext) as UserContent;
   const [newWaveFormData, setNewWaveFormData] = useReducer(formReducer, {
     title: "",
     board_slug: "",
-    username: currentUser.username,
+    username: currentUser?.username,
   });
   function formReducer(state: formState, { target }: { target: EventTarget }) {
     return {
@@ -23,7 +23,7 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
     };
   }
   const [allBoards, setAllBoards] = useState<Board[]>([]);
-  const [boardLookup, setBoardLookup] = useState<[string, string][]>([]);
+  const [boardLookup, setBoardLookup] = useState<string[][]>([]);
 
   useEffect(() => {
     getBoards().then(({ boards }) => {
@@ -40,21 +40,15 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
     const formData = new FormData(event.target as HTMLFormElement);
     formData.append("audio_file", audioData as Blob, "audio.webm");
 
-    axios
-      .post("https://back-end-sound-waves.onrender.com/api/waves", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+    createWave(formData)
       .then((response) => {
-        console.log("it worked!");
         console.log(response);
       })
       .catch((err) => {
-        console.log("it didn't work");
         console.log(err);
       });
   };
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col max-w-lg">
       <label className="text-lg mt-3" htmlFor="title">
@@ -92,9 +86,9 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
           onChange={setNewWaveFormData}
           id="username"
           name="username"
-          value={currentUser.username}
+          value={currentUser?.username}
         />
-        <p className="ml-2 mt-3">{currentUser.username}</p>
+        <p className="ml-2 mt-3">{currentUser?.username}</p>
       </div>
       <div className="mt-4 flex flex-col items-center space-y-4">
         <button className="flex border-2 bg-violet-700 shadow border-violet-500 rounded-full p-3 text-white hover:bg-violet-200">
