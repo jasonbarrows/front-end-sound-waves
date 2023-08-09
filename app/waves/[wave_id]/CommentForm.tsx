@@ -3,6 +3,7 @@ import { UserContent, UserContext } from "@/app/context";
 import { useState, useContext } from "react";
 import { postComment } from "../../utils/AxiosFunctions";
 import { Comment } from "../../models";
+import LoadingSpinner from "../new/LoadingSpinner";
 interface Props {
   comments: Comment[];
   setComments: (newComments: Comment[]) => void;
@@ -11,7 +12,7 @@ interface Props {
 function CommentForm({ comments, setComments }: Props): React.ReactElement {
   const [newComment, setNewComment] = useState<string>("");
   const [apiError, setApiError] = useState<boolean>(false);
-  const [buttonIsDisabled, setButtonIsDisabled] = useState<boolean>(false);
+  // const [buttonIsDisabled, setButtonIsDisabled] = useState<boolean>(false);
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const { wave_id } = useParams();
 
@@ -24,6 +25,7 @@ function CommentForm({ comments, setComments }: Props): React.ReactElement {
     event.preventDefault();
 
     if (newComment.length > 0 && newComment.length <= 160) {
+      setIsUploading(true)
       postComment(wave_id, username, newComment)
         .then(({ comment }) => {
           comment.avatar_url = currentUser?.avatar_url;
@@ -34,7 +36,11 @@ function CommentForm({ comments, setComments }: Props): React.ReactElement {
         })
         .catch((err) => {
           console.log(err, "add comment error");
-        });
+          setApiError(true)
+        })
+        .finally(() => {
+          setIsUploading(false)
+        })
     }
   };
 
@@ -62,14 +68,17 @@ function CommentForm({ comments, setComments }: Props): React.ReactElement {
       </div>
       <div>
         <button
+          disabled={isUploading}
           type="submit"
           value="submit"
           className={`outline-double outline-3 outline-offset-2 flex items-center border-2 shadow text-violet-50 border-violet-500 bg-violet-700 rounded-full mt-6 py-3 px-6 ${
             isUploading ? "" : "active:bg-violet-900"
           }`}
         >
-          Add comment
+          {isUploading && <LoadingSpinner />}
+          <span className="ml-1">{isUploading ? "Adding Comment" : "Add Comment"}</span>
         </button>
+        {apiError && <p className="text-gray-500 mt-2">Sorry, that did not work. Please try again.</p>}
       </div>
     </form>
   );
