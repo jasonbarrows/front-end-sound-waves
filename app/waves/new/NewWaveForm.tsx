@@ -96,7 +96,7 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
         name="username"
         value={currentUser?.username}
       />
-      <div className="mt-4 flex flex-col items-center space-y-4">
+      <div className="mt-3 flex flex-col items-center space-y-4">
         <button
           disabled={isUploading}
           className={`flex items-center border-2 shadow text-violet-50 border-violet-500 bg-violet-700 rounded-full py-3 px-6 ${isUploading ? '' : 'active:bg-violet-900'}`}

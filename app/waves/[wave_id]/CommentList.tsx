@@ -23,7 +23,7 @@ function CommentList({ wave_id }: Props): React.ReactElement {
       <h2 className="text-xl font-semibold text-violet-900 mt-4">Comments</h2>
       <div className="space-y-3 mt-6">
         {comments.length === 0 ? (
-          <p>Be the first to make a wave!</p>
+          <p>Be the first to comment!</p>
         ) : (
           comments.map((comment) => (
             <CommentCard key={comment.comment_id} comment={comment} />
