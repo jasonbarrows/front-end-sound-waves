@@ -67,7 +67,7 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
         Title
       </label>
       <input
-        className="border-2 border-violet-700 rounded-full py-2 px-4 focus:outline-none focus:ring focus:ring-violet-300  "
+        className="border-2 border-violet-700 rounded-full py-2 px-4 focus:outline-none focus:ring focus:ring-violet-300"
         id="title"
         type="text"
         name="title"

@@ -1,9 +1,7 @@
 "use client";
-
+import { useState, useEffect } from "react";
 import WaveDetails from "./WaveDetails";
 import CommentList from "./CommentList";
-import CommentForm from "./CommentForm";
-import { useEffect, useState } from "react";
 import { getWaveById } from "@/app/utils/AxiosFunctions";
 import { Wave } from "@/app/models";
 
@@ -36,11 +34,12 @@ export default function Page({
 
   return (
     <main className="m-4">
-      <h1 className="text-2xl sm:text-3xl font-semibold text-violet-900">{wave?.title}</h1>
+      <h1 className="text-2xl sm:text-3xl font-semibold text-violet-900">
+        {wave?.title}
+      </h1>
       <div className="mt-4 ">
         <WaveDetails wave={wave} />
-        <CommentList wave_id={params.wave_id}/>
-        <CommentForm />
+        <CommentList wave_id={params.wave_id} />
       </div>
     </main>
   );
