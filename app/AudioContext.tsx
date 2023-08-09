@@ -56,7 +56,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
         wave_url && "https://mffyiqvrkwogdmivjovi.supabase.co/storage/v1/object/public/waves/" +
         wave_url
       }
-    ></audio>
+    />
   );
 
   return (
