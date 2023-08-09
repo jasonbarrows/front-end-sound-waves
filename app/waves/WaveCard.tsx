@@ -24,20 +24,30 @@ function WaveCard({ wave }: Props) {
     pause,
   } = useContext(WaveContext) as WaveContextType;
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const audioRef = useRef<HTMLAudioElement>();
 
   useEffect(() => {
-    if (isPlaying) {
-      play();
+    if (globalIsPlaying && currentWave?.wave_id !== wave.wave_id) {
+      setIsPlaying(false);
     }
-  }, [currentWave]);
+    if (!globalIsPlaying && currentWave?.wave_id == wave.wave_id) {
+      setIsPlaying(false);
+    }
+    if (globalIsPlaying && currentWave?.wave_id == wave.wave_id) {
+      setIsPlaying(true);
+    }
+  }, [currentWave, globalIsPlaying]);
 
   const playPause = () => {
-    setIsPlaying((curr) => !curr);
+    setIsPlaying(false);
+    setGlobalIsPlaying(false);
 
     if (!isPlaying) {
-      setCurrentWave(wave);
+      Promise.all([setCurrentWave(wave)]).then(() => {
+        setIsPlaying(true);
+        play();
+      });
     } else {
+      setIsPlaying(false);
       pause();
     }
   };
@@ -55,7 +65,6 @@ function WaveCard({ wave }: Props) {
             {ago(new Date(created_at))}
           </p>
         </div>
-
         <Explicit censor={wave.censor} />
       </div>
 
