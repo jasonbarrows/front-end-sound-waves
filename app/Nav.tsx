@@ -52,7 +52,9 @@ const products = [
 ];
 
 export default function Example() {
-  const { currentUser, setCurrentUser } = useContext(UserContext) as UserContent;
+  const { currentUser, setCurrentUser } = useContext(
+    UserContext
+  ) as UserContent;
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -170,7 +172,13 @@ export default function Example() {
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <Link href="/waves" className="-m-1.5 p-1.5" onClick={() => { setMobileMenuOpen(false) }}>
+            <Link
+              href="/waves"
+              className="-m-1.5 p-1.5"
+              onClick={() => {
+                setMobileMenuOpen(false);
+              }}
+            >
               <span className="sr-only">SoundWaves</span>
               <GiSoundWaves className="h-8 w-auto" />
             </Link>
@@ -189,21 +197,27 @@ export default function Example() {
                 <Link
                   href="/waves"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  onClick={() => { setMobileMenuOpen(false) }}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                  }}
                 >
                   The Ocean
                 </Link>
                 <Link
                   href="/boards"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  onClick={() => { setMobileMenuOpen(false) }}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                  }}
                 >
                   View Boards
                 </Link>
                 <Link
                   href="/waves/new"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  onClick={() => { setMobileMenuOpen(false) }}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                  }}
                 >
                   Make a Wave
                 </Link>
@@ -212,15 +226,20 @@ export default function Example() {
                 <Link
                   href="/profile"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  onClick={() => { setMobileMenuOpen(false) }}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                  }}
                 >
-                  Aloha, BigC
+                  Aloha, {currentUser?.username}
                 </Link>
                 <Link
-                  href="#"
+                  href="/"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                  }}
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Log out
+                  Change User
                 </Link>
               </div>
             </div>

@@ -33,9 +33,9 @@ const NowPlaying: React.FC = () => {
         </svg>
       </div> */}
       <div className="pt-2 p-4 w-full shadow-lg flex flex-col space-y-1.5 bg-white border-2 border-violet-700 rounded-[2rem]">
-        <div className="mx-3 flex flex-col">
-          <span className="text-neutral-400 text-xs">Now playing: </span>
-          <span className="block text-sm font-semibold truncate">
+        <div className="mx-3 flex ">
+          <span className=" text-sm">Now playing: </span>
+          <span className=" ml-2 text-sm text-violet-900 truncate">
             {currentWave?.title}
           </span>
         </div>

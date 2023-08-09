@@ -27,10 +27,13 @@ export default function Home() {
           <span className="text-pink-600">{currentUser?.username}</span>{" "}
         </p>
         <img
-          className="rounded-full object-cover w-8 h-8 ml-4"
+          className="rounded-full object-cover w-8 h-8 ml-2"
           src={currentUser?.avatar_url}
         />
       </section>
+      <h2 className="text-2xl sm:text-3xl font-semibold text-violet-900 ml-4 mt-4">
+        Choose User:
+      </h2>
       <div className="grid grid-cols-2 gap-4 m-4">
         {allUsers.map((user) => {
           return (
