@@ -9,7 +9,6 @@ export function getAllWaves(board_slug?: string): Promise<{ waves: Wave[] }> {
   let queryStr = "/waves";
   board_slug ? (queryStr += `?board=${board_slug}`) : null;
   return api.get(queryStr).then(({ data }) => {
-    console.log(data);
     return data;
   });
 }
@@ -36,7 +35,6 @@ export function getCommentsbyWaveId(
   wave_id: number
 ): Promise<{ comments: Comment[] }> {
   return api.get(`/waves/${wave_id}/comments`).then(({ data }) => {
-    console.log(data);
     return data;
   });
 }
@@ -49,7 +47,18 @@ export function createWave(formData: FormData): Promise<{ wave: Wave }> {
       },
     })
     .then(({ data }) => {
-      console.log(data);
+      return data;
+    });
+}
+
+export function postComment(
+  wave_id: number,
+  username: string,
+  comment: string
+): Promise<{ comment: Comment }> {
+  return api
+    .post(`/waves/${wave_id}/comments`, { username, comment })
+    .then(({ data }) => {
       return data;
     });
 }
