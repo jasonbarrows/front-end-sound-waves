@@ -16,7 +16,7 @@ const NowPlaying: React.FC = () => {
   return (
     <div
       hidden={globalIsPlaying}
-      className="flex items-center space-y-1 left-0 right-0 fixed mx-4 bottom-3 h-28 rounded-t-lg justify-around"
+      className="flex items-center overflow-hidden space-y-1 left-0 right-0 fixed mx-3 bottom-3 h-28 rounded-t-lg justify-around"
     >
       {/* <div className="p-1.5 flex items-center justify-center ring-2 ring-pink-400 text-pink-700 rounded-full">
         <svg
@@ -32,10 +32,12 @@ const NowPlaying: React.FC = () => {
           />
         </svg>
       </div> */}
-      <div className="pt-2 p-4 w-full flex flex-col space-y-1.5 bg-white border-2 border-violet-700 rounded-[2rem]">
+      <div className="pt-2 p-4 w-full shadow-lg flex flex-col space-y-1.5 bg-white border-2 border-violet-700 rounded-[2rem]">
         <div className="mx-3 flex flex-col">
           <span className="text-neutral-400 text-xs">Now playing: </span>
-          <span className="block text-sm font-semibold truncate">{currentWave?.title}</span>
+          <span className="block text-sm font-semibold truncate">
+            {currentWave?.title}
+          </span>
         </div>
         <div className="mx-auto">{nowPlaying(currentWave?.wave_url)}</div>
       </div>
