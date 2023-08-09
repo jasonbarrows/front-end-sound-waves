@@ -24,8 +24,8 @@ export default function RootLayout({
       <UserProvider>
         <AudioProvider>
           <body className="mb-32 pb-4 bg-sky-50 text-neutral-900">
-            <Nav />
             <div className="container mx-auto">
+              <Nav />
               {children} <NowPlaying />
             </div>
           </body>
