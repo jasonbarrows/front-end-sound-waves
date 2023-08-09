@@ -9,7 +9,7 @@ interface Props {
   setComments: (newComments: Comment[]) => void;
 }
 
-function CommentForm({ comments, setComments }: Props): React.ReactElement {
+function CommentForm({ comments, setComments, setUserComments }: Props): React.ReactElement {
   const [newComment, setNewComment] = useState<string>("");
   const [apiError, setApiError] = useState<boolean>(false);
   // const [buttonIsDisabled, setButtonIsDisabled] = useState<boolean>(false);
@@ -26,12 +26,13 @@ function CommentForm({ comments, setComments }: Props): React.ReactElement {
 
     if (newComment.length > 0 && newComment.length <= 160) {
       setIsUploading(true)
-      postComment(wave_id, username, newComment)
+      postComment(Number(wave_id), username, newComment)
         .then(({ comment }) => {
-          comment.avatar_url = currentUser?.avatar_url;
+          comment.avatar_url = currentUser.avatar_url;
           setComments((currComments) => {
             return [comment, ...currComments];
           });
+          setUserComments((curr: number) => curr + 1);
           setNewComment("");
         })
         .catch((err) => {

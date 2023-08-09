@@ -11,7 +11,8 @@ export default function Page({
   params: { wave_id: number };
 }): React.ReactElement {
   const [wave, setWave] = useState<Wave | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [userComments, setUserComments] = useState<number>(0);
 
   useEffect(() => {
     getWaveById(params.wave_id)
@@ -38,8 +39,8 @@ export default function Page({
         {wave?.title}
       </h1>
       <div className="mt-4 ">
-        <WaveDetails wave={wave} />
-        <CommentList wave_id={params.wave_id} />
+        <WaveDetails wave={wave} userComments={userComments} />
+        <CommentList wave_id={params.wave_id} setUserComments={setUserComments} />
       </div>
     </main>
   );

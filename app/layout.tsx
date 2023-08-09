@@ -1,5 +1,3 @@
-// "use client";
-
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -23,7 +21,7 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <UserProvider>
         <AudioProvider>
-          <body className="mb-28 pb-4 bg-sky-50 text-neutral-900">
+          <body className="mb-32 pb-4 bg-sky-50 text-neutral-900">
             <div className="container mx-auto">
               <Nav />
               {children} <NowPlaying />

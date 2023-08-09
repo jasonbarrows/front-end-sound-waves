@@ -13,44 +13,12 @@ interface Props {
 }
 
 function WaveCard({ wave }: Props) {
-  const { title, wave_url, board_slug, created_at, username, avatar_url } =
-    wave;
+  const { title, wave_url, board_slug, created_at, username, avatar_url } = wave;
   const {
     currentWave,
-    setCurrentWave,
-    globalIsPlaying,
-    setGlobalIsPlaying,
-    play,
-    pause,
+    isPlaying,
+    togglePlay,
   } = useContext(WaveContext) as WaveContextType;
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (globalIsPlaying && currentWave?.wave_id !== wave.wave_id) {
-      setIsPlaying(false);
-    }
-    if (!globalIsPlaying && currentWave?.wave_id == wave.wave_id) {
-      setIsPlaying(false);
-    }
-    if (globalIsPlaying && currentWave?.wave_id == wave.wave_id) {
-      setIsPlaying(true);
-    }
-  }, [currentWave, globalIsPlaying]);
-
-  const playPause = () => {
-    setIsPlaying(false);
-    setGlobalIsPlaying(false);
-
-    if (!isPlaying) {
-      Promise.all([setCurrentWave(wave)]).then(() => {
-        setIsPlaying(true);
-        play();
-      });
-    } else {
-      setIsPlaying(false);
-      pause();
-    }
-  };
 
   return (
     <div className="p-4 sm:px-8 sm:py-6 w-full shadow border rounded-xl bg-white flex flex-col space-y-2">
@@ -72,27 +40,27 @@ function WaveCard({ wave }: Props) {
         <p className="text-xl font-medium text-cyan-700">{title}</p>
       </Link>
       <div className="w-full flex items-center space-x-2 text-sm font-medium text-violet-700">
-        <button className="flex items-center" onClick={playPause}>
+        <button className="flex items-center" onClick={() => togglePlay(wave)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
             className="w-5 h-5"
           >
-            {!isPlaying ? (
-              <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-            ) : (
-              <path d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z" />
-            )}
+            {
+              (isPlaying && currentWave?.wave_url === wave.wave_url)
+              ? <path d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z" />
+              : <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+            }
           </svg>
-          <span className="ml-2">{isPlaying ? "Pause" : "Listen"}</span>
+          <span className="ml-2">{(isPlaying && currentWave?.wave_url === wave.wave_url) ? "Pause" : "Listen"}</span>
         </button>
         <span className="text-neutral-300">/</span>
         <p className="text-sm font-light">on b/{board_slug}</p>
         {/* <p>Show transcript</p> */}
       </div>
-      <div className="flex justify-end space-x-4">
-        <div className="flex items-center space-x-1">
+      <div className="flex justify-end space-x-5">
+        <div className="flex items-center space-x-2">
           <AiOutlineHeart className="w-5 h-5 text-neutral-300" />
           <p className="text-sm text-neutral-500">{wave.likes}</p>
         </div>

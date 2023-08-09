@@ -6,9 +6,10 @@ import CommentForm from "./CommentForm";
 
 interface Props {
   wave_id: number;
+  // setUserComments: () => {};
 }
 
-function CommentList({ wave_id }: Props): React.ReactElement {
+function CommentList({ wave_id, setUserComments }: Props): React.ReactElement {
   const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
@@ -19,7 +20,11 @@ function CommentList({ wave_id }: Props): React.ReactElement {
 
   return (
     <section className="mt-4">
-      <CommentForm comments={comments} setComments={setComments} />
+      <CommentForm
+        comments={comments}
+        setComments={setComments}
+        setUserComments={setUserComments}
+      />
       <h2 className="text-xl font-semibold text-violet-900 mt-4">Comments</h2>
       <div className="space-y-3 mt-6">
         {comments.length === 0 ? (
