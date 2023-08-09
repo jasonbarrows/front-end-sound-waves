@@ -20,17 +20,25 @@ function WaveDetails({ wave }: { wave: Wave }): React.ReactElement {
   } = useContext(WaveContext) as WaveContextType;
 
   useEffect(() => {
-    if (isPlaying) {
-      play();
+    if (globalIsPlaying && currentWave?.wave_id !== wave.wave_id) {
+      setIsPlaying(false);
     }
-  }, [currentWave]);
+    if (!globalIsPlaying && currentWave?.wave_id == wave.wave_id) {
+      setIsPlaying(false);
+    }
+  }, [currentWave, globalIsPlaying]);
 
   const playPause = () => {
-    setIsPlaying((curr) => !curr);
+    setIsPlaying(false);
+    setGlobalIsPlaying(false);
 
     if (!isPlaying) {
-      setCurrentWave(wave);
+      Promise.all([setCurrentWave(wave)]).then(() => {
+        setIsPlaying(true);
+        play();
+      });
     } else {
+      setIsPlaying(false);
       pause();
     }
   };
