@@ -1,6 +1,6 @@
 "use client";
 
-import { GiBigWave } from "react-icons/gi";
+import { GiSoundWaves } from "react-icons/gi";
 import { PiWaves } from "react-icons/pi";
 
 import Link from "next/link";
@@ -57,7 +57,7 @@ export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white">
+    <header className="bg-white shadow-md">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
@@ -65,7 +65,7 @@ export default function Example() {
         <div className="flex lg:flex-1">
           <Link href="/waves" className="-m-1.5 p-1.5">
             <span className="sr-only">SoundWaves</span>
-            <GiBigWave className="h-6 w-6" />
+            <GiSoundWaves className="h-8 w-8" />
           </Link>
         </div>
         <div>
@@ -172,7 +172,7 @@ export default function Example() {
           <div className="flex items-center justify-between">
             <Link href="/waves" className="-m-1.5 p-1.5" onClick={() => { setMobileMenuOpen(false) }}>
               <span className="sr-only">SoundWaves</span>
-              <GiBigWave className="h-8 w-auto" />
+              <GiSoundWaves className="h-8 w-auto" />
             </Link>
             <button
               type="button"
