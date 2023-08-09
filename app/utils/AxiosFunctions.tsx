@@ -5,8 +5,11 @@ const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
 });
 
-export function getAllWaves(): Promise<{ waves: Wave[] }> {
-  return api.get("/waves").then(({ data }) => {
+export function getAllWaves(board_slug?: string): Promise<{ waves: Wave[] }> {
+  let queryStr = "/waves";
+  board_slug ? (queryStr += `?board=${board_slug}`) : null;
+  return api.get(queryStr).then(({ data }) => {
+    console.log(data);
     return data;
   });
 }
@@ -19,7 +22,6 @@ export function getBoards(): Promise<{ boards: Array<Board> }> {
 
 export function getUsers(): Promise<{ users: Array<User> }> {
   return api.get("/users").then(({ data }) => {
-    console.log("this is data", data);
     return data;
   });
 }
@@ -51,4 +53,3 @@ export function createWave(formData: FormData): Promise<{ wave: Wave }> {
       return data;
     });
 }
-  

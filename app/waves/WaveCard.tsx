@@ -5,14 +5,16 @@ import { WaveContext, WaveContextType } from "../AudioContext";
 import Link from "next/link";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+
+import Explicit from "./Explicit";
 
 interface Props {
   wave: Wave;
 }
 
 function WaveCard({ wave }: Props) {
-  const { title, wave_url, board_slug, created_at, username, avatar_url } = wave;
+  const { title, wave_url, board_slug, created_at, username, avatar_url } =
+    wave;
   const {
     currentWave,
     setCurrentWave,
@@ -43,15 +45,8 @@ function WaveCard({ wave }: Props) {
             {ago(new Date(created_at))}
           </p>
         </div>
-        {
-          !wave.censor &&
-          <div className="text-pink-600 flex items-center text-sm sm:text-base">
-            <span className="block">Explicit</span>
-            <span className="ml-1 sm:ml-2 w-6 h-6 sm:w-8 sm:h-8">
-              <ExclamationTriangleIcon />
-            </span>
-          </div>
-        }
+
+        <Explicit censor={wave.censor} />
       </div>
 
       <Link href={`/waves/${wave.wave_id}`}>
@@ -84,11 +79,11 @@ function WaveCard({ wave }: Props) {
       </div>
       <div className="flex justify-end space-x-4">
         <div className="flex items-center space-x-1">
-          <AiOutlineHeart className="w-5 h-5 text-neutral-300"/>
+          <AiOutlineHeart className="w-5 h-5 text-neutral-300" />
           <p className="text-sm text-neutral-500">{wave.likes}</p>
         </div>
         <div className="flex items-center space-x-1">
-          <FaRegComment className="w-5 h-5 text-neutral-300"/>
+          <FaRegComment className="w-5 h-5 text-neutral-300" />
           <p className="text-sm text-neutral-500">{wave.comment_count}</p>
         </div>
       </div>
