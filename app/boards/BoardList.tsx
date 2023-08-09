@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import BoardCard from "./BoardCard";
 // import NewBoardForm from "./NewBoardForm";
 import { getBoards } from "../utils/AxiosFunctions";
+import { Board } from "../models";
 
-function BoardList(): React.ReactElement {
-  const [boards, setBoards] = useState([]);
+function BoardList() {
+  const [boards, setBoards] = useState<Board[]>([]);
 
   useEffect(() => {
     getBoards().then((res) => {
@@ -14,7 +15,7 @@ function BoardList(): React.ReactElement {
 
   return (
     <main className="m-4">
-         {/* <NewBoardForm /> */}
+      {/* <NewBoardForm /> */}
       <h2 className="text-2xl sm:text-3xl font-semibold text-violet-900">
         All Boards
       </h2>
@@ -23,7 +24,6 @@ function BoardList(): React.ReactElement {
           <BoardCard key={board.board_slug} board={board} />
         ))}
       </div>
-   
     </main>
   );
 }

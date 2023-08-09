@@ -10,6 +10,7 @@ export interface Wave {
   censor: boolean;
   comment_count: number;
   avatar_url: string;
+  board_name: string;
 }
 
 export interface Board {
@@ -37,4 +38,3 @@ export interface Comment {
   wave_id: number;
   avatar_url: string;
 }
-
