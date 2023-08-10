@@ -11,22 +11,26 @@ function WaveDetails({
   wave,
   userComments,
 }: {
-  wave: Wave | null,
-  userComments: number,
+  wave: Wave | null;
+  userComments: number;
 }): React.ReactElement {
   const [showTranscript, setShowTranscript] = useState<boolean>(false);
-  const {
-    currentWave,
-    isPlaying,
-    togglePlay,
-  } = useContext(WaveContext) as WaveContextType;
+  const { currentWave, isPlaying, togglePlay } = useContext(
+    WaveContext
+  ) as WaveContextType;
 
   return (
     <div>
       <div className="p-4 w-full shadow border rounded-xl bg-white flex flex-col space-y-3">
         <div className="flex item-center justify-between">
           <div className="flex items-center space-x-1">
-            <img className="w-8 h-8 rounded-full" src={wave?.avatar_url}></img>
+
+            <img
+              className="w-8 h-8 rounded-full"
+              src={wave?.avatar_url}
+              alt={`${wave?.username} profile picture`}
+            ></img>
+
             <p className="text-sm font-medium truncate text-neutral-700">
               {wave?.username}
             </p>
@@ -35,16 +39,19 @@ function WaveDetails({
               {wave && ago(new Date(wave.created_at))}
             </p>
           </div>
-          <Explicit censor={wave.censor} />
+          <Explicit censor={wave?.censor || false} />
         </div>
+
         <div className="w-full flex items-center space-x-2 text-sm text-violet-700">
           <button className="flex items-center" onClick={() => togglePlay(wave)}>
+
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
               className="w-5 h-5"
             >
+
               {
                 isPlaying && currentWave?.wave_url === wave?.wave_url
                 ? <path d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z" />
@@ -57,6 +64,7 @@ function WaveDetails({
           <Link href={`/boards/${wave?.board_slug}`}>
             <p className="text-sm font-light underline">{wave?.board_slug}</p>
           </Link>
+
         </div>
 
         <div className="flex items-center justify-between">
