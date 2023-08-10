@@ -1,5 +1,6 @@
 "use client";
 
+import { WaveSkeleton } from "@/app/Skeletons";
 import { Board, Wave } from "@/app/models";
 import { getAllWaves, getBoards } from "@/app/utils/AxiosFunctions";
 import AddWave from "@/app/waves/AddWave";
@@ -15,10 +16,14 @@ export default function Page({
 }): React.ReactElement {
   const [boardWaves, setBoardWaves] = useState<Wave[]>([]);
   const [currentBoard, setCurrentBoard] = useState<Board | null>(null);
+  const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getAllWaves(params.board_slug).then(({ waves }) => {
       setBoardWaves(waves);
+      setIsLoading(false);
     });
     getBoards().then(({ boards }) => {
       setCurrentBoard(() => {
@@ -48,7 +53,13 @@ export default function Page({
           <AddWave />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-4">
-          <WaveList waves={boardWaves} />
+          {isLoading ? (
+            skeletonArray.map((num) => {
+              return <WaveSkeleton key={num} />;
+            })
+          ) : (
+            <WaveList waves={boardWaves} />
+          )}
         </div>
       </div>
     </main>

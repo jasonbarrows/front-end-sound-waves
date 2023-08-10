@@ -6,17 +6,20 @@ import UserCard from "./UserCards";
 import { UserContent, UserContext } from "./context";
 import Image from "next/image";
 import AddWave from "./waves/AddWave";
+import { UserSkeleton } from "./Skeletons";
 
 export default function Home() {
-  //
   const [allUsers, setAllUsers] = useState<User[]>([]);
   const { currentUser, setCurrentUser } = useContext(
     UserContext
   ) as UserContent;
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const skeletonArray = new Array(1, 2, 3, 4, 5, 6, 7, 8);
 
   useEffect(() => {
     getUsers().then(({ users }) => {
       setAllUsers(users);
+      setIsLoading(false);
     });
   }, []);
 
@@ -40,16 +43,20 @@ export default function Home() {
         <AddWave />
       </div>
       <div className="grid grid-cols-2 gap-4 m-4">
-        {allUsers.map((user) => {
-          return (
-            <UserCard
-              key={user.email}
-              user={user}
-              setCurrentUser={setCurrentUser}
-              currentUser={currentUser}
-            />
-          );
-        })}
+        {isLoading
+          ? skeletonArray.map((num) => {
+              return <UserSkeleton key={num} />;
+            })
+          : allUsers.map((user) => {
+              return (
+                <UserCard
+                  key={user.email}
+                  user={user}
+                  setCurrentUser={setCurrentUser}
+                  currentUser={currentUser}
+                />
+              );
+            })}
       </div>
     </main>
   );

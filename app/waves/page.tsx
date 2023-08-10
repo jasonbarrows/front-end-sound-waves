@@ -5,13 +5,17 @@ import { useEffect, useState } from "react";
 import { Wave } from "../models";
 import { getAllWaves } from "../utils/AxiosFunctions";
 import AddWave from "./AddWave";
+import { WaveSkeleton } from "../Skeletons";
 
 function Waves(): React.ReactElement {
   const [waves, setWaves] = useState<Wave[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const skeletonArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
   useEffect(() => {
     getAllWaves().then(({ waves }) => {
       setWaves(waves);
+      setIsLoading(false);
     });
   }, []);
 
@@ -24,7 +28,13 @@ function Waves(): React.ReactElement {
         <AddWave />
       </div>
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-4">
-        <WaveList waves={waves} />
+        {isLoading ? (
+          skeletonArray.map((num) => {
+            return <WaveSkeleton key={num} />;
+          })
+        ) : (
+          <WaveList waves={waves} />
+        )}
       </div>
     </main>
   );
