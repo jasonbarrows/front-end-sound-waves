@@ -39,7 +39,7 @@ function WaveCard({ wave }: Props) {
       <Link href={`/waves/${wave.wave_id}`}>
         <p className="text-xl font-medium text-cyan-700">{title}</p>
       </Link>
-      <div className="w-full flex items-center space-x-2 text-sm font-medium text-violet-700">
+      <div className="w-full flex items-center space-x-2 text-sm text-violet-700">
         <button className="flex items-center" onClick={() => togglePlay(wave)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -53,10 +53,12 @@ function WaveCard({ wave }: Props) {
               : <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
             }
           </svg>
-          <span className="ml-2">{(isPlaying && currentWave?.wave_url === wave.wave_url) ? "Pause" : "Listen"}</span>
+          <span className="ml-2 font-bold">{(isPlaying && currentWave?.wave_url === wave.wave_url) ? "Pause" : "Listen"}</span>
         </button>
-        <span className="text-neutral-300">/</span>
-        <p className="text-sm font-light">on b/{board_slug}</p>
+        <span className="text-pink-600">/</span>
+        <Link href={`/boards/${board_slug}`}>
+          <p className="text-sm font-light underline">{board_slug}</p>
+        </Link>
         {/* <p>Show transcript</p> */}
       </div>
       <div className="flex justify-end space-x-5">

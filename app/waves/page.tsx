@@ -18,9 +18,9 @@ function Waves(): React.ReactElement {
   return (
     <main className="m-4">
       <div className="flex justify-between">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-violet-900">
+        <h1 className="text-2xl sm:text-3xl font-extralight text-violet-900">
           The Ocean
-        </h2>
+        </h1>
         <AddWave />
       </div>
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-4">
