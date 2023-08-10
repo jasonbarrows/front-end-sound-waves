@@ -10,6 +10,31 @@ export function UserSkeleton() {
   );
 }
 
+export function WaveDetailSkeleton() {
+  return (
+    <div className="p-4 sm:px-8 sm:py-6 w-full shadow border rounded-xl bg-white flex flex-col space-y-2">
+      <div className="flex item-center justify-between">
+        <div className="flex items-center space-x-1">
+          <div className="w-8 h-8 bg-neutral-200 rounded-full animate-pulse"></div>
+          <div className="w-16 h-6 bg-neutral-200 rounded-full animate-pulse"></div>
+          <span className="text-neutral-300">•</span>
+          <div className="w-16 h-6 bg-neutral-200 rounded-full animate-pulse"></div>
+        </div>
+      </div>
+
+      <div className="w-full flex items-center space-x-2 text-sm font-medium">
+        <div className="w-10 h-6 bg-neutral-200 rounded-full animate-pulse"></div>
+        <span className="text-neutral-300">/</span>
+        <div className="w-16 h-6 bg-neutral-200 rounded-full animate-pulse"></div>
+      </div>
+      <div className="flex justify-end space-x-5">
+        <div className="w-6 h-6 bg-neutral-200 rounded-full animate-pulse"></div>
+        <div className="w-6 h-6 bg-neutral-200 rounded-full animate-pulse"></div>
+      </div>
+    </div>
+  );
+}
+
 export function WaveSkeleton() {
   return (
     <div className="p-4 sm:px-8 sm:py-6 w-full shadow border rounded-xl bg-white flex flex-col space-y-2">
