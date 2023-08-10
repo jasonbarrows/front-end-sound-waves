@@ -34,9 +34,7 @@ export default function Page({
       </h1>
       <div className="mt-4 ">
         {isLoading ? (
-          skeletonArray.map((num) => {
-            return <WaveDetailSkeleton key={num} />;
-          })
+          <WaveDetailSkeleton />
         ) : (
           <WaveDetails wave={wave} userComments={userComments} />
         )}
