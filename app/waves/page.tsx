@@ -22,7 +22,7 @@ function Waves(): React.ReactElement {
   return (
     <main className="m-4">
       <div className="flex justify-between">
-        <h1 className="text-2xl sm:text-3xl font-semibold text-violet-900">
+        <h1 className="text-2xl sm:text-3xl font-extralight text-violet-900">
           The Ocean
         </h1>
         <AddWave />

@@ -42,7 +42,7 @@ export default function Page({
           <span className="text-pink-600">
             <GiSurfBoard className="w-8 h-8" />
           </span>
-          <h1 className="ml-2 text-2xl sm:text-3xl font-semibold text-violet-900">
+          <h1 className="ml-3 text-2xl sm:text-3xl text-violet-900">
             {currentBoard?.board_name || "404: Board not found"}
           </h1>
         </div>

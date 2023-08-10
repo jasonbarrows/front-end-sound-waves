@@ -33,10 +33,11 @@ export default function Home() {
         <img
           className="rounded-full object-cover w-8 h-8 ml-2"
           src={currentUser?.avatar_url}
+          alt={`${currentUser} profile picture`}
         />
       </section>
       <div className="flex justify-between mt-4 mx-4 ">
-        <h1 className="text-2xl sm:text-3xl font-semibold text-violet-900">
+        <h1 className="text-2xl sm:text-3xl font-extralight text-violet-900">
           Choose User:
         </h1>
         <AddWave />

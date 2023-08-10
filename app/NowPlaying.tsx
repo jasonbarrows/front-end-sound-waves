@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { WaveContext, WaveContextType } from "./AudioContext";
 import { useContext } from "react";
 
@@ -17,7 +18,10 @@ const NowPlaying: React.FC = () => {
         <div className="mx-3 flex items-baseline text-xs">
           <span className="whitespace-nowrap">Now playing: </span>
           <span className=" ml-2 text-sm font-medium text-violet-900 truncate">
-            {currentWave ? currentWave.title : 'Stopped'}
+            {
+              currentWave
+              ? <Link href={`/waves/${currentWave.wave_id}`}>{currentWave.title}</Link>
+              : 'Stopped'}
           </span>
         </div>
         <div className="mx-auto">{nowPlaying()}</div>
