@@ -29,6 +29,7 @@ export default function Home() {
         <img
           className="rounded-full object-cover w-8 h-8 ml-2"
           src={currentUser?.avatar_url}
+          alt={`${currentUser} profile picture`}
         />
       </section>
       <h2 className="text-2xl sm:text-3xl font-semibold text-violet-900 ml-4 mt-4">

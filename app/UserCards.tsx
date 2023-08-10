@@ -22,6 +22,7 @@ export default function UserCard({ user, setCurrentUser, currentUser }: Props) {
       <img
         className=" rounded-full  object-cover w-32 h-32 "
         src={user?.avatar_url}
+        alt={`${user?.username} profile picture`}
       />
       <p className="mt-2 text-xl">{user?.username}</p>
     </div>

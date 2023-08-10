@@ -1,15 +1,15 @@
 import { Comment } from "@/app/models";
 import { ago } from "@/app/utils";
 
-function CommentCard({
-  comment
-}: {
-  comment: Comment
-}): React.ReactElement {
+function CommentCard({ comment }: { comment: Comment }): React.ReactElement {
   return (
     <div className="p-4 w-full shadow border rounded-xl bg-white flex flex-col space-y-2">
       <div className="flex items-center space-x-1">
-        <img className="w-8 h-8 rounded-full" src={comment.avatar_url}></img>
+        <img
+          className="w-8 h-8 rounded-full"
+          src={comment.avatar_url}
+          alt={`${comment.username} profile picture`}
+        ></img>
         <p className="text-sm font-medium truncate text-neutral-700">
           {comment.username}
         </p>
