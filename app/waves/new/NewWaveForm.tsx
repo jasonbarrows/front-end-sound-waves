@@ -4,7 +4,7 @@ import { useReducer, useState, useEffect, useContext } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import { useRouter } from "next/navigation";
 
-function NewWaveForm({ audioData }: { audioData: Blob | null }) {
+function NewWaveForm({ audioData, setHasAudioDataError }: { audioData: Blob | null }) {
   interface formState {
     title: string;
     board_slug: string;
@@ -30,7 +30,8 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
 
   const [boardLookup, setBoardLookup] = useState<string[][]>([]);
   const [isUploading, setIsUploading] = useState<boolean>(false);
-
+  const [hasTitleError, setHasTitleError] = useState<boolean>(false);
+  
   const router = useRouter();
 
   useEffect(() => {
@@ -44,40 +45,54 @@ function NewWaveForm({ audioData }: { audioData: Blob | null }) {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setIsUploading(true);
 
-    const formData = new FormData(event.target as HTMLFormElement);
-    formData.append("audio_file", audioData as Blob, "audio.webm");
+    setHasAudioDataError(false)
+    setHasTitleError(false)
 
-    createWave(formData)
-      .then(({ wave }) => {
-        router.push(`/waves/${wave.wave_id}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsUploading(false);
-      });
+    if (audioData !== null && newWaveFormData.title !== "") {
+      setIsUploading(true);
+
+      const formData = new FormData(event.target as HTMLFormElement);
+      formData.append("audio_file", audioData as Blob, "audio.webm");
+
+      createWave(formData)
+        .then(({ wave }) => {
+          router.push(`/waves/${wave.wave_id}`);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setIsUploading(false);
+        });
+    } else {
+      if (audioData === null) {
+        setHasAudioDataError(true)
+      }
+      if (newWaveFormData.title === "") {
+        setHasTitleError(true)
+      }
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col max-w-lg">
-      <label className="text-lg mt-3" htmlFor="title">
+      <label className="font-medium mt-3" htmlFor="title">
         Title
       </label>
       <input
-        className="border-2 border-violet-700 rounded-full py-2 px-4 focus:outline-none focus:ring focus:ring-violet-300"
+        className="mt-1 border-2 border-violet-700 rounded-full py-2 px-4 focus:outline-none focus:ring focus:ring-violet-300"
         id="title"
         type="text"
         name="title"
         onChange={setNewWaveFormData}
       />
-      <label className="mt-3" htmlFor="board_slug">
+        {hasTitleError && <p className="mt-2 text-sm text-red-600">You need to enter a title.</p>}
+      <label className="font-medium mt-3" htmlFor="board_slug">
         Board
       </label>
       <select
-        className="border-2 border-violet-700 rounded-full py-2 px-4 focus:outline-none focus:ring focus:ring-violet-300"
+        className="mt-1 border-2 border-violet-700 rounded-full py-2 px-4 focus:outline-none focus:ring focus:ring-violet-300"
         onChange={setNewWaveFormData}
         name="board_slug"
       >
