@@ -46,10 +46,10 @@ export default function Page({
             {currentBoard?.board_name || "404: Board not found"}
           </h1>
         </div>
-        <p className="mt-3 text-violet-800">{currentBoard?.description}</p>
+        <p className="mt-3 text-neutral-500">{currentBoard?.description}</p>
       </div>
       <div className="m-4 mt-2">
-        <div className="mb-2 flex justify-end">
+        <div className="mb-2 py-2 flex justify-end">
           <AddWave />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-4">
