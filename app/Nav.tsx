@@ -72,7 +72,7 @@ export default function Example() {
         </div>
         <div>
           <Link href="/waves">
-            <p className="text-xl text-violet-800">
+            <p className="text-2xl text-violet-900">
               <span className="font-extralight">Sound</span>
               <span className="font-semibold">Waves</span>
             </p>
@@ -149,12 +149,9 @@ export default function Example() {
           </Link>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6">
-          <Link
-            href="/users"
-            className="text-sm font-semibold leading-6 text-gray-900"
-          >
-            <span>Aloha, {currentUser?.username}</span>
-          </Link>
+            <span className="text-sm font-semibold leading-6 text-gray-900">
+              Logged in as {currentUser?.username}
+            </span>
           <Link
             href="/login"
             className="text-sm font-semibold leading-6 text-gray-900"
@@ -170,7 +167,7 @@ export default function Example() {
         onClose={setMobileMenuOpen}
       >
         <div className="fixed inset-0 z-10" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-sky-50 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <Link
               href="/waves"
@@ -196,7 +193,7 @@ export default function Example() {
               <div className="space-y-2 py-6">
                 <Link
                   href="/waves"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  className="-mx-3 text-center block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   onClick={() => {
                     setMobileMenuOpen(false);
                   }}
@@ -205,7 +202,7 @@ export default function Example() {
                 </Link>
                 <Link
                   href="/boards"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  className="-mx-3 text-center block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   onClick={() => {
                     setMobileMenuOpen(false);
                   }}
@@ -214,7 +211,7 @@ export default function Example() {
                 </Link>
                 <Link
                   href="/waves/new"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  className="-mx-3 text-center block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   onClick={() => {
                     setMobileMenuOpen(false);
                   }}
@@ -224,23 +221,17 @@ export default function Example() {
               </div>
               <div className="py-6">
                 <Link
-                  href="/profile"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                  }}
-                >
-                  Aloha, {currentUser?.username}
-                </Link>
-                <Link
                   href="/"
                   onClick={() => {
                     setMobileMenuOpen(false);
                   }}
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  className="-mx-3 text-center block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Change User
                 </Link>
+                <span className="-mx-3 text-center block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  Aloha, {currentUser?.username}
+                </span>
               </div>
             </div>
           </div>

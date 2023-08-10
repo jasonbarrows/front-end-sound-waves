@@ -33,7 +33,7 @@ export default function Home() {
         />
       </section>
       <div className="flex justify-between mt-4 mx-4 ">
-        <h1 className="text-2xl sm:text-3xl font-semibold text-violet-900">
+        <h1 className="text-2xl sm:text-3xl font-extralight text-violet-900">
           Choose User:
         </h1>
         <AddWave />
