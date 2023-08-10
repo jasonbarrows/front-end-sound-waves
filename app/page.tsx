@@ -5,6 +5,7 @@ import { getUsers } from "./utils/AxiosFunctions";
 import UserCard from "./UserCards";
 import { UserContent, UserContext } from "./context";
 import Image from "next/image";
+import AddWave from "./waves/AddWave";
 
 export default function Home() {
   //
@@ -32,9 +33,12 @@ export default function Home() {
           alt={`${currentUser} profile picture`}
         />
       </section>
-      <h2 className="text-2xl sm:text-3xl font-semibold text-violet-900 ml-4 mt-4">
-        Choose User:
-      </h2>
+      <div className="flex justify-between mt-4 mx-4 ">
+        <h1 className="text-2xl sm:text-3xl font-extralight text-violet-900">
+          Choose User:
+        </h1>
+        <AddWave />
+      </div>
       <div className="grid grid-cols-2 gap-4 m-4">
         {allUsers.map((user) => {
           return (
