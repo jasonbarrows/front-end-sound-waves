@@ -8,8 +8,8 @@ import axios from "axios";
 export interface WaveContextType {
   currentWave: Wave | null;
   isPlaying: boolean;
-  nowPlaying: (wave_url: string | undefined) => JSX.Element;
-  togglePlay: (wave: Wave) => void;
+  nowPlaying: () => JSX.Element;
+  togglePlay: (wave: Wave | null) => void;
 }
 
 export const WaveContext = createContext<WaveContextType | null>(null);
@@ -185,17 +185,19 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
     timeController = requestAnimationFrame(whilePlaying);
   }
 
-  const togglePlay = (wave: Wave) => {
-    if (isPlaying) {
-      pause();
-      cancelAnimationFrame(animationController);
-      cancelAnimationFrame(timeController);
+  const togglePlay = (wave: Wave | null) => {
+    if (wave) {
+      if (isPlaying) {
+        pause();
+        cancelAnimationFrame(animationController);
+        cancelAnimationFrame(timeController);
 
-      if (currentWave?.wave_url !== wave?.wave_url) {
+        if (currentWave?.wave_url !== wave?.wave_url) {
+          play(wave);
+        }
+      } else {
         play(wave);
       }
-    } else {
-      play(wave);
     }
   };
 

@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ReactMic } from "react-mic";
 
