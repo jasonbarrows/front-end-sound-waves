@@ -3,11 +3,12 @@
 import { useState } from "react";
 import VoiceRecorder from "./VoiceRecorder";
 import NewWaveForm from "./NewWaveForm";
+import { useSearchParams } from "next/navigation";
 
 function Page() {
   const [audioData, setAudioData] = useState<Blob | null>(null);
   const [hasAudioDataError, setHasAudioDataError] = useState<boolean>(false);
-
+  useSearchParams();
   return (
     <main className="m-4">
       <h1 className="sr-only text-2xl sm:text-3xl font-semibold text-violet-900">
