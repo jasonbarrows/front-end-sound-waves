@@ -20,7 +20,7 @@ let timeController: number;
 export const AudioProvider = ({ children }: { children: ReactNode }) => {
   const [currentWave, setCurrentWave] = useState<Wave | null>(null);
   const [globalIsPlaying, setGlobalIsPlaying] = useState<boolean>(false);
-
+  console.log(currentWave);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -203,7 +203,14 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
 
   const nowPlaying = () => (
     <>
-      <audio ref={audioRef} />
+      {/* Some kind of issue with how the audio is decoded and put into the audio ref. Seems like webm can be played fine on Safari */}
+      <audio
+        controls
+        src={`https://mffyiqvrkwogdmivjovi.supabase.co/storage/v1/object/public/waves/${currentWave?.wave_url}`}
+        // ref={audioRef}
+      />
+      {/* <audio ref={audioRef} /> */}
+
       <canvas
         ref={canvasRef}
         width={320}
