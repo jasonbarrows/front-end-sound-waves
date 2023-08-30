@@ -126,9 +126,9 @@ export class MicrophoneRecorder {
       options: mediaOptions,
 
       blobURL:
-        typeof window === "undefined" ? window.URL.createObjectURL(blob) : null,
+        typeof window === "undefined" ? null : window.URL.createObjectURL(blob),
     };
-
+    console.log(blobObject);
     if (onStopCallback) {
       onStopCallback(blobObject);
     }

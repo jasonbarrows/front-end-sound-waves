@@ -48,7 +48,7 @@ function VoiceRecorder({
           className="w-full h-48 border rounded-md "
           strokeColor="#6d28d9"
           record={isRecording}
-          mimeType={"audio/webm"}
+          mimeType={"audio/wav"}
           onStop={(blob) => {
             const { blobURL } = blob;
             setRecordedAudio(blobURL);
