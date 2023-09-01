@@ -20,7 +20,7 @@ let timeController: number;
 export const AudioProvider = ({ children }: { children: ReactNode }) => {
   const [currentWave, setCurrentWave] = useState<Wave | null>(null);
   const [globalIsPlaying, setGlobalIsPlaying] = useState<boolean>(false);
-  console.log(currentWave);
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -155,7 +155,25 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
           }
         )
         .then(({ data }) => {
+          // Latest guess is that it's being saved at text/plain in back-end rather than audio
+
+          // console.log({ data });
+          // let reader = new FileReader();
+          // reader.readAsDataURL(data);
+          // reader.onload = function () {
+          //   audioRef.current.src = reader.result;
+          //   console.log(reader.result);
+          // };
+          // console.log(reader.result);
+          // const notSaf = URL.createObjectURL(data);
+          // console.log({ notSaf });
+
           if (audioRef.current) {
+            // reader.onload = function () {
+            //   audioRef.current.src = reader.result;
+            //   console.log(reader.result);
+            //   console.log(audioRef.current.src);
+            // };
             audioRef.current.src = URL.createObjectURL(data);
           }
           return data.arrayBuffer();
@@ -170,6 +188,7 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
           if (progressBar.current) {
             progressBar.current.max = seconds.toString();
           }
+
           audioRef.current?.play();
 
           audioRef.current?.addEventListener("ended", () => {
@@ -204,12 +223,12 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
   const nowPlaying = () => (
     <>
       {/* Some kind of issue with how the audio is decoded and put into the audio ref. Seems like webm can be played fine on Safari */}
-      <audio
+      {/* <audio
         controls
         src={`https://mffyiqvrkwogdmivjovi.supabase.co/storage/v1/object/public/waves/${currentWave?.wave_url}`}
         // ref={audioRef}
-      />
-      {/* <audio ref={audioRef} /> */}
+      /> */}
+      <audio ref={audioRef} />
 
       <canvas
         ref={canvasRef}

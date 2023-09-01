@@ -94,10 +94,7 @@ function VoiceRecorder({
             {isRecording ? "Stop recording" : "Record new wave"}
           </span>
         </button>
-        <p>
-          Playback of recorded wave is currently not supported, but the wave
-          will still be uploaded on submit.
-        </p>
+
         <audio controls src={recordedAudio}></audio>
       </section>
     </>
