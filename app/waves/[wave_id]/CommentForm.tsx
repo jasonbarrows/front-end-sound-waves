@@ -1,15 +1,20 @@
 import { useParams } from "next/navigation";
 import { UserContent, UserContext } from "@/app/context";
-import { useState, useContext } from "react";
+import { useState, useContext, Dispatch, SetStateAction } from "react";
 import { postComment } from "../../utils/AxiosFunctions";
 import { Comment } from "../../models";
 import LoadingSpinner from "../new/LoadingSpinner";
 interface Props {
   comments: Comment[];
-  setComments: (newComments: Comment[]) => void;
+  setComments: Dispatch<SetStateAction<Comment[]>>;
+  setUserComments: Dispatch<SetStateAction<number>>;
 }
 
-function CommentForm({ comments, setComments, setUserComments }: Props): React.ReactElement {
+function CommentForm({
+  comments,
+  setComments,
+  setUserComments,
+}: Props): React.ReactElement {
   const [newComment, setNewComment] = useState<string>("");
   const [apiError, setApiError] = useState<boolean>(false);
   // const [buttonIsDisabled, setButtonIsDisabled] = useState<boolean>(false);
@@ -25,11 +30,11 @@ function CommentForm({ comments, setComments, setUserComments }: Props): React.R
     event.preventDefault();
 
     if (newComment.length > 0 && newComment.length <= 160) {
-      setIsUploading(true)
-      postComment(Number(wave_id), username, newComment)
+      setIsUploading(true);
+      postComment(Number(wave_id), username as string, newComment)
         .then(({ comment }) => {
-          comment.avatar_url = currentUser.avatar_url;
-          setComments((currComments) => {
+          comment.avatar_url = currentUser?.avatar_url as string;
+          setComments((currComments: Comment[]) => {
             return [comment, ...currComments];
           });
           setUserComments((curr: number) => curr + 1);
@@ -37,11 +42,11 @@ function CommentForm({ comments, setComments, setUserComments }: Props): React.R
         })
         .catch((err) => {
           console.log(err, "add comment error");
-          setApiError(true)
+          setApiError(true);
         })
         .finally(() => {
-          setIsUploading(false)
-        })
+          setIsUploading(false);
+        });
     }
   };
 
@@ -77,9 +82,15 @@ function CommentForm({ comments, setComments, setUserComments }: Props): React.R
           }`}
         >
           {isUploading && <LoadingSpinner />}
-          <span className="ml-1">{isUploading ? "Adding Comment" : "Add Comment"}</span>
+          <span className="ml-1">
+            {isUploading ? "Adding Comment" : "Add Comment"}
+          </span>
         </button>
-        {apiError && <p className="text-gray-500 mt-2">Sorry, that did not work. Please try again.</p>}
+        {apiError && (
+          <p className="text-gray-500 mt-2">
+            Sorry, that did not work. Please try again.
+          </p>
+        )}
       </div>
     </form>
   );

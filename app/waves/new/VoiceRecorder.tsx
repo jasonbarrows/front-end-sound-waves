@@ -1,7 +1,9 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Dispatch, SetStateAction, useState } from "react";
-import { ReactMic } from "react-mic";
+// import { ReactMic } from "react-mic";
+import ReactMic from "./(react-mic)/ReactMic";
 
 interface AudioBlob {
   blob: {
@@ -30,11 +32,23 @@ function VoiceRecorder({
   return (
     <>
       <section className="mt-4 flex flex-col items-center space-y-4 ">
-        <ReactMic
+        {/* <ReactMic
           className="w-full h-48 border rounded-md "
           strokeColor="#6d28d9"
           record={isRecording}
           mimeType={"audio/webm"}
+          onStop={(blob) => {
+            const { blobURL } = blob;
+            setRecordedAudio(blobURL);
+            setAudioData(blob.blob);
+          }}
+          onData={(data: unknown) => {}}
+        /> */}
+        <ReactMic
+          className="w-full h-48 border rounded-md "
+          strokeColor="#6d28d9"
+          record={isRecording}
+          mimeType={"audio/wav"}
           onStop={(blob) => {
             const { blobURL } = blob;
             setRecordedAudio(blobURL);
@@ -80,6 +94,7 @@ function VoiceRecorder({
             {isRecording ? "Stop recording" : "Record new wave"}
           </span>
         </button>
+
         <audio controls src={recordedAudio}></audio>
       </section>
     </>

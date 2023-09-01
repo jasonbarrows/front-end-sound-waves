@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import { UserProvider } from "./context";
 import { AudioProvider } from "./AudioContext";
 import NowPlaying from "./NowPlaying";
+import { useSearchParams } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 

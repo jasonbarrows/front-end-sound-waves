@@ -1,10 +1,22 @@
 import { UserContent, UserContext } from "@/app/context";
 import { createWave, getBoards } from "@/app/utils/AxiosFunctions";
-import { useReducer, useState, useEffect, useContext } from "react";
+import {
+  useReducer,
+  useState,
+  useEffect,
+  useContext,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import { useRouter } from "next/navigation";
 
-function NewWaveForm({ audioData, setHasAudioDataError }: { audioData: Blob | null }) {
+interface Props {
+  audioData: Blob | null;
+  setHasAudioDataError: Dispatch<SetStateAction<boolean>>;
+}
+
+function NewWaveForm({ audioData, setHasAudioDataError }: Props) {
   interface formState {
     title: string;
     board_slug: string;
@@ -31,7 +43,7 @@ function NewWaveForm({ audioData, setHasAudioDataError }: { audioData: Blob | nu
   const [boardLookup, setBoardLookup] = useState<string[][]>([]);
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [hasTitleError, setHasTitleError] = useState<boolean>(false);
-  
+
   const router = useRouter();
 
   useEffect(() => {
@@ -46,8 +58,8 @@ function NewWaveForm({ audioData, setHasAudioDataError }: { audioData: Blob | nu
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setHasAudioDataError(false)
-    setHasTitleError(false)
+    setHasAudioDataError(false);
+    setHasTitleError(false);
 
     if (audioData !== null && newWaveFormData.title !== "") {
       setIsUploading(true);
@@ -67,10 +79,10 @@ function NewWaveForm({ audioData, setHasAudioDataError }: { audioData: Blob | nu
         });
     } else {
       if (audioData === null) {
-        setHasAudioDataError(true)
+        setHasAudioDataError(true);
       }
       if (newWaveFormData.title === "") {
-        setHasTitleError(true)
+        setHasTitleError(true);
       }
     }
   };
@@ -87,7 +99,9 @@ function NewWaveForm({ audioData, setHasAudioDataError }: { audioData: Blob | nu
         name="title"
         onChange={setNewWaveFormData}
       />
-        {hasTitleError && <p className="mt-2 text-sm text-red-600">You need to enter a title.</p>}
+      {hasTitleError && (
+        <p className="mt-2 text-sm text-red-600">You need to enter a title.</p>
+      )}
       <label className="font-medium mt-3" htmlFor="board_slug">
         Board
       </label>
@@ -114,7 +128,9 @@ function NewWaveForm({ audioData, setHasAudioDataError }: { audioData: Blob | nu
       <div className="mt-3 flex flex-col items-center space-y-4">
         <button
           disabled={isUploading}
-          className={`flex items-center border-2 shadow text-violet-50 border-violet-500 bg-violet-700 rounded-full py-3 px-6 ${isUploading ? '' : 'active:bg-violet-900'}`}
+          className={`flex items-center border-2 shadow text-violet-50 border-violet-500 bg-violet-700 rounded-full py-3 px-6 ${
+            isUploading ? "" : "active:bg-violet-900"
+          }`}
         >
           {isUploading && <LoadingSpinner />}
           <span className="ml-1">{isUploading ? "Submitting" : "Submit"}</span>

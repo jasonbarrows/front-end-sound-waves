@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import CommentCard from "./CommentCard";
 import { getCommentsbyWaveId } from "@/app/utils/AxiosFunctions";
 import { Comment } from "@/app/models";
@@ -6,7 +6,7 @@ import CommentForm from "./CommentForm";
 
 interface Props {
   wave_id: number;
-  // setUserComments: () => {};
+  setUserComments: Dispatch<SetStateAction<number>>;
 }
 
 function CommentList({ wave_id, setUserComments }: Props): React.ReactElement {
